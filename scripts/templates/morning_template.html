@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U&I株倶楽部新聞</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-sans: 'Noto Sans JP', 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition: .25s cubic-bezier(.4,0,.2,1);
+  --max-w: 1100px;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0d1117;
+  --bg-card: #161b22;
+  --bg-card-hover: #21262d;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --border: #30363d;
+  --accent: #58a6ff;
+  --accent-green: #3fb950;
+  --accent-green-light: rgba(63,185,80,.12);
+  --accent-red: #f85149;
+  --accent-red-light: rgba(248,81,73,.12);
+  --accent-amber: #d29922;
+  --accent-amber-light: rgba(210,153,34,.12);
+  --accent-purple: #bc8cff;
+  --accent-purple-light: rgba(188,140,255,.12);
+  --shadow-card: 0 2px 8px rgba(0,0,0,.3);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f5f0e8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0ebe3;
+  --text-primary: #2c2418;
+  --text-secondary: #6b5d4d;
+  --text-muted: #9a8c7c;
+  --border: #ddd4c6;
+  --accent: #2563b8;
+  --accent-green: #1a7f37;
+  --accent-green-light: rgba(26,127,55,.1);
+  --accent-red: #cf222e;
+  --accent-red-light: rgba(207,34,46,.1);
+  --accent-amber: #9a6700;
+  --accent-amber-light: rgba(154,103,0,.1);
+  --accent-purple: #7c3aed;
+  --accent-purple-light: rgba(124,58,237,.1);
+  --shadow-card: 0 1px 4px rgba(44,36,24,.08), 0 2px 8px rgba(44,36,24,.04);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ==========================================
+   Newspaper Header
+   ========================================== */
+.paper-header {
+  border-bottom: 1px solid var(--border);
+  padding: 32px 20px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.paper-header::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 3px;
+  background: var(--border);
+}
+
+.paper-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: .08em;
+  margin-bottom: 12px;
+}
+
+.paper-logo {
+  display: inline-block;
+  position: relative;
+  padding: 0 32px;
+}
+
+.paper-logo::before,
+.paper-logo::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 2px;
+  background: var(--text-primary);
+  opacity: .3;
+}
+
+.paper-logo::before { right: 100%; margin-right: 8px; }
+.paper-logo::after { left: 100%; margin-left: 8px; }
+
+.paper-title {
+  font-family: var(--font-serif);
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.paper-title .paper-accent {
+  display: block;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: .25em;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.paper-edition {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 14px;
+  letter-spacing: .06em;
+  background: var(--bg-card);
+}
+
+/* ==========================================
+   Back Link
+   ========================================== */
+.back-link {
+  position: fixed; top: 16px; left: 16px; z-index: 999;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--accent); text-decoration: none;
+  font-size: .78rem; font-weight: 500;
+  font-family: var(--font-sans);
+  transition: all .15s;
+  box-shadow: var(--shadow-card);
+}
+.back-link:hover { background: var(--accent); color: var(--bg-primary); border-color: var(--accent); }
+.back-link svg { flex-shrink: 0; }
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 999;
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+  transition: all .15s;
+  box-shadow: var(--shadow-card);
+}
+.theme-toggle:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+
+/* ==========================================
+   Main Content
+   ========================================== */
+.main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ==========================================
+   Section
+   ========================================== */
+.section {
+  margin-bottom: 40px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.section-label-icon { font-size: 20px; }
+
+.section-label-text {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.section-label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ==========================================
+   1. Market Summary (Narrative)
+   ========================================== */
+.summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.summary-text {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--text-primary);
+}
+
+.summary-topic {
+  display: block;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -.01em;
+}
+
+.summary-topic.positive { color: var(--accent-green); }
+.summary-topic.negative { color: var(--accent-red); }
+.summary-topic.neutral { color: var(--accent); }
+
+.summary-text p {
+  margin-bottom: 18px;
+}
+
+.summary-text p:last-child { margin-bottom: 0; }
+
+.summary-num {
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 700;
+}
+
+.summary-num.up { color: var(--accent-green); }
+.summary-num.down { color: var(--accent-red); }
+
+.summary-label {
+  font-weight: 700;
+}
+
+/* Inline tickers row */
+.summary-tickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.summary-ticker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.summary-ticker-name {
+  color: var(--text-secondary);
+}
+
+.summary-ticker-val {
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.summary-ticker-chg {
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.summary-ticker-chg.up { color: var(--accent-green); }
+.summary-ticker-chg.down { color: var(--accent-red); }
+
+/* ==========================================
+   2. Economic Calendar
+   ========================================== */
+.calendar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.calendar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+.calendar-item:last-child { border-bottom: none; }
+.calendar-item:hover { background: var(--bg-card); }
+
+.calendar-time {
+  font-family: 'Inter', var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 52px;
+  text-align: center;
+}
+
+.calendar-importance {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.calendar-importance.high {
+  background: var(--accent-red-light);
+  color: var(--accent-red);
+}
+
+.calendar-importance.medium {
+  background: var(--accent-amber-light);
+  color: var(--accent-amber);
+}
+
+.calendar-importance.low {
+  background: rgba(255,255,255,.06);
+  color: var(--text-muted);
+}
+
+.calendar-event {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-flag {
+  font-size: 16px;
+}
+
+.calendar-detail {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ==========================================
+   3. Top Story + Sub News
+   ========================================== */
+.top-story {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 16px;
+  transition: all var(--transition);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-story::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 5px; height: 100%;
+  background: var(--accent);
+}
+
+.top-story:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  border-color: #484f58;
+}
+
+.top-story-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: rgba(88,166,255,.15);
+  color: var(--accent);
+  letter-spacing: .04em;
+  margin-bottom: 14px;
+}
+
+.top-story-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  margin-bottom: 14px;
+}
+
+.top-story-body {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.top-story-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.top-story-source {
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* Sub news grid */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.news-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  transition: all var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.news-card:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+  transform: translateY(-2px);
+  border-color: #484f58;
+}
+
+.news-card:hover::before { opacity: 1; }
+
+.news-card.economy::before { background: var(--accent); }
+.news-card.tech::before { background: var(--accent-green); }
+.news-card.earnings::before { background: var(--accent-amber); }
+.news-card.geopolitics::before { background: var(--accent-red); }
+.news-card.policy::before { background: var(--accent-purple); }
+
+.news-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.news-card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: .02em;
+}
+
+.news-card-tag.economy { background: rgba(88,166,255,.12); color: var(--accent); }
+.news-card-tag.tech { background: var(--accent-green-light); color: var(--accent-green); }
+.news-card-tag.earnings { background: var(--accent-amber-light); color: var(--accent-amber); }
+.news-card-tag.geopolitics { background: var(--accent-red-light); color: var(--accent-red); }
+.news-card-tag.policy { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+.news-card-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.news-card-title {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+}
+
+.news-card-excerpt {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   4. Earnings Preview
+   ========================================== */
+.earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.earnings-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all var(--transition);
+}
+
+.earnings-item:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.earnings-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.earnings-item-ticker {
+  font-family: 'Inter', var(--font-sans);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.earnings-item-timing {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.06);
+  color: var(--text-muted);
+}
+
+.earnings-item-timing.bmo { background: var(--accent-amber-light); color: var(--accent-amber); }
+.earnings-item-timing.amc { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+.earnings-item-name {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.earnings-item-sector {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  display: inline-block;
+  align-self: flex-start;
+  line-height: 1.4;
+}
+
+[data-theme="light"] .earnings-item-sector {
+  background: rgba(0,0,0,.03);
+}
+
+.earnings-item-consensus {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 12px;
+}
+
+.earnings-item-consensus span {
+  font-family: 'Inter', var(--font-sans);
+}
+
+.earnings-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.earnings-item-link:hover { opacity: .7; }
+
+/* ==========================================
+   Responsive
+   ========================================== */
+@media (min-width: 768px) {
+  .main { padding: 36px 40px 60px; }
+  .paper-header { padding: 40px 40px 28px; }
+  .paper-title { font-size: 52px; }
+}
+
+@media (max-width: 767px) {
+  .paper-title { font-size: 32px; letter-spacing: .08em; }
+  .paper-logo::before, .paper-logo::after { width: 30px; }
+  .news-grid { grid-template-columns: 1fr; }
+  .top-story { padding: 22px; }
+  .top-story-title { font-size: 20px; }
+  .summary-tickers { gap: 8px; }
+  .summary-ticker { padding: 6px 10px; font-size: 12px; }
+  .earnings-grid { grid-template-columns: repeat(2, 1fr); }
+  .back-link { top: 10px; left: 10px; padding: 6px 10px; font-size: .7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Back Link -->
+<a class="back-link" href="prototype.html">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>ポータル</a>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">☀️</button>
+
+<!-- ===== Newspaper Header ===== -->
+<header class="paper-header">
+  <div class="paper-date" id="paperDate"></div>
+  <div class="paper-logo">
+    <h1 class="paper-title">
+      U&I株倶楽部新聞
+      <span class="paper-accent">U & I KABU CLUB TIMES</span>
+    </h1>
+  </div>
+  <div class="paper-edition" id="paperEdition"></div>
+</header>
+
+<!-- ===== Main ===== -->
+<main class="main">
+
+  <!-- ===== 1. 昨夜のマーケットサマリー ===== -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-icon">📝</span>
+      <span class="section-label-text">昨夜のマーケットサマリー</span>
+      <span class="section-label-line"></span>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-text">
+        <p>
+          <span class="summary-topic positive">CPI鈍化で株式市場は反発 — テック主導の上昇</span>
+          2月CPI（消費者物価指数）が前年比<span class="summary-num up">+2.8%</span>と市場予想の+2.9%を下回り、インフレ鈍化の流れが鮮明になりました。
+          これを受けて<span class="summary-label">S&P 500</span>は<span class="summary-num up">+1.12%</span>と反発。
+          <span class="summary-label">NASDAQ</span>はAI半導体株が牽引して<span class="summary-num up">+1.38%</span>と上昇しました。
+          一方、<span class="summary-label">ダウ</span>は輸送株の軟調が足を引っ張り<span class="summary-num down">-0.24%</span>の小幅安。
+        </p>
+        <p>
+          <span class="summary-topic neutral">債券・為替 — 利下げ織り込み進行、円は強含み</span>
+          債券市場では、<span class="summary-label">米10年債利回り</span>が<span class="summary-num">4.28%</span>と小幅上昇。CME FedWatchでは6月利下げの織り込みが72%に上昇しています。
+          為替は<span class="summary-label">ドル円</span>が<span class="summary-num up">148.60円</span>と円高方向に振れ、日銀の追加利上げ観測が円買い圧力を強めています。
+        </p>
+        <p>
+          <span class="summary-topic neutral">コモディティ — 金が史上最高値、原油は軟調</span>
+          コモディティでは<span class="summary-label">金</span>が<span class="summary-num up">$2,980</span>と史上最高値を更新。中央銀行の買い増しが継続する一方、<span class="summary-label">WTI原油</span>は<span class="summary-num down">$67.12</span>とOPEC+増産観測で下落しました。
+          <span class="summary-label">ビットコイン</span>は<span class="summary-num up">$82,450</span>と反発、ETF資金流入の再加速が支えています。
+        </p>
+      </div>
+
+      <div class="summary-tickers">
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">S&P 500</span>
+          <span class="summary-ticker-val">5,842</span>
+          <span class="summary-ticker-chg up">+1.12%</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">NASDAQ</span>
+          <span class="summary-ticker-val">18,456</span>
+          <span class="summary-ticker-chg up">+1.38%</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">ダウ</span>
+          <span class="summary-ticker-val">43,215</span>
+          <span class="summary-ticker-chg down">-0.24%</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">Russell 2000</span>
+          <span class="summary-ticker-val">2,087</span>
+          <span class="summary-ticker-chg up">+0.68%</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">米10年債</span>
+          <span class="summary-ticker-val">4.28%</span>
+          <span class="summary-ticker-chg down">+0.03</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">USD/JPY</span>
+          <span class="summary-ticker-val">148.60</span>
+          <span class="summary-ticker-chg up">-0.45</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">Gold</span>
+          <span class="summary-ticker-val">$2,980</span>
+          <span class="summary-ticker-chg up">+0.84%</span>
+        </div>
+        <div class="summary-ticker">
+          <span class="summary-ticker-name">BTC</span>
+          <span class="summary-ticker-val">$82,450</span>
+          <span class="summary-ticker-chg up">+2.36%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. 主要ニュース ===== -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-icon">📰</span>
+      <span class="section-label-text">主要ニュース</span>
+      <span class="section-label-line"></span>
+    </div>
+
+    <!-- Top Story -->
+    <a href="#" class="top-story">
+      <span class="top-story-badge">TOP STORY</span>
+      <h2 class="top-story-title">CPI鈍化でFRB6月利下げ確率が72%に上昇 — インフレ退治の最終章へ</h2>
+      <p class="top-story-body">
+        2月の消費者物価指数（CPI）が前年比+2.8%と市場予想の+2.9%を下回った。コアCPIも+3.1%と鈍化傾向が鮮明になり、CME FedWatchでは6月利下げの織り込みが72%まで上昇。住居費の伸びが6ヶ月連続で鈍化したことが最大の要因で、パウエル議長が繰り返し指摘してきた「ラグ効果」がようやく統計に反映され始めた。市場では年内2回の利下げがメインシナリオとして定着しつつある。
+      </p>
+      <div class="top-story-footer">
+        <span class="top-story-source">Reuters / Bloomberg</span>
+        <span>·</span>
+        <span>06:45</span>
+        <span>·</span>
+        <span>マクロ経済</span>
+      </div>
+    </a>
+
+    <!-- Sub News -->
+    <div class="news-grid">
+
+      <a href="#" class="news-card tech">
+        <div class="news-card-meta">
+          <span class="news-card-tag tech">テクノロジー</span>
+          <span class="news-card-source">CNBC</span>
+        </div>
+        <h3 class="news-card-title">NVIDIA、次世代GPU「Blackwell Ultra」の量産前倒しを発表</h3>
+        <p class="news-card-excerpt">GTC 2026で次世代AI向けGPUの量産を1四半期前倒しすると発表。データセンター需要の急増に対応。株価は時間外で+3.2%上昇。</p>
+        <div class="news-card-footer">
+          <span>06:50</span>
+          <span>·</span>
+          <span>テクノロジー</span>
+        </div>
+      </a>
+
+      <a href="#" class="news-card geopolitics">
+        <div class="news-card-meta">
+          <span class="news-card-tag geopolitics">地政学</span>
+          <span class="news-card-source">Bloomberg</span>
+        </div>
+        <h3 class="news-card-title">トランプ政権、カナダ・メキシコ関税の発動を延期か</h3>
+        <p class="news-card-excerpt">追加関税の発動を少なくとも2週間延期する方向で調整中。市場ではリスクオンの動きが強まり、S&P500先物が上昇した。</p>
+        <div class="news-card-footer">
+          <span>05:20</span>
+          <span>·</span>
+          <span>地政学・通商</span>
+        </div>
+      </a>
+
+      <a href="#" class="news-card earnings">
+        <div class="news-card-meta">
+          <span class="news-card-tag earnings">決算</span>
+          <span class="news-card-source">FT</span>
+        </div>
+        <h3 class="news-card-title">Oracle、クラウド売上+49%で過去最高のRPOを記録</h3>
+        <p class="news-card-excerpt">FY26Q3決算でOCIが前年比49%増。RPOは過去最高の$130Bに到達し、ガイダンスも市場予想を上回った。</p>
+        <div class="news-card-footer">
+          <span>05:55</span>
+          <span>·</span>
+          <span>決算</span>
+        </div>
+      </a>
+
+      <a href="#" class="news-card policy">
+        <div class="news-card-meta">
+          <span class="news-card-tag policy">金融政策</span>
+          <span class="news-card-source">日経新聞</span>
+        </div>
+        <h3 class="news-card-title">日銀、4月追加利上げの可能性が浮上</h3>
+        <p class="news-card-excerpt">春闘の賃上げ率が3年連続5%超の見通し。日銀内部で4月会合での追加利上げ検討の声。10年債利回りは1.52%に上昇。</p>
+        <div class="news-card-footer">
+          <span>05:30</span>
+          <span>·</span>
+          <span>金融政策</span>
+        </div>
+      </a>
+
+      <a href="#" class="news-card tech">
+        <div class="news-card-meta">
+          <span class="news-card-tag tech">テクノロジー</span>
+          <span class="news-card-source">The Verge</span>
+        </div>
+        <h3 class="news-card-title">Meta、Threads月間ユーザーが3億人を突破</h3>
+        <p class="news-card-excerpt">X（旧Twitter）への対抗が本格化。年内に広告プラットフォーム導入を予定しており、新たな収益源として期待が高まる。</p>
+        <div class="news-card-footer">
+          <span>05:10</span>
+          <span>·</span>
+          <span>テクノロジー</span>
+        </div>
+      </a>
+
+      <a href="#" class="news-card economy">
+        <div class="news-card-meta">
+          <span class="news-card-tag economy">マーケット</span>
+          <span class="news-card-source">MarketWatch</span>
+        </div>
+        <h3 class="news-card-title">金価格が$2,980で史上最高値を更新</h3>
+        <p class="news-card-excerpt">中央銀行の買い増しとドル安進行が金価格を押し上げ。$3,000の心理的節目突破が視野に。ETF残高も3年ぶり高水準。</p>
+        <div class="news-card-footer">
+          <span>04:38</span>
+          <span>·</span>
+          <span>コモディティ</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== 3. 今日の注目イベント ===== -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-icon">📅</span>
+      <span class="section-label-text">今日の注目イベント</span>
+      <span class="section-label-line"></span>
+    </div>
+
+    <div class="calendar-list">
+      <div class="calendar-item">
+        <span class="calendar-time">08:50</span>
+        <span class="calendar-flag">🇯🇵</span>
+        <span class="calendar-event">日銀短観（3月調査）</span>
+        <span class="calendar-importance medium">注目</span>
+        <span class="calendar-detail">前回: +14</span>
+      </div>
+      <div class="calendar-item">
+        <span class="calendar-time">21:30</span>
+        <span class="calendar-flag">🇺🇸</span>
+        <span class="calendar-event">PPI（生産者物価指数）</span>
+        <span class="calendar-importance high">重要</span>
+        <span class="calendar-detail">予想: +0.3% / 前回: +0.4%</span>
+      </div>
+      <div class="calendar-item">
+        <span class="calendar-time">23:00</span>
+        <span class="calendar-flag">🇺🇸</span>
+        <span class="calendar-event">ミシガン大消費者信頼感指数（速報値）</span>
+        <span class="calendar-importance high">重要</span>
+        <span class="calendar-detail">予想: 63.1 / 前回: 64.7</span>
+      </div>
+      <div class="calendar-item">
+        <span class="calendar-time">23:00</span>
+        <span class="calendar-flag">🇺🇸</span>
+        <span class="calendar-event">ミシガン大インフレ期待（1年先）</span>
+        <span class="calendar-importance medium">注目</span>
+        <span class="calendar-detail">前回: 4.3%</span>
+      </div>
+      <div class="calendar-item">
+        <span class="calendar-time">03:00</span>
+        <span class="calendar-flag">🇺🇸</span>
+        <span class="calendar-event">米財務省30年債入札</span>
+        <span class="calendar-importance low">参考</span>
+        <span class="calendar-detail">$220億</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. 決算プレビュー ===== -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-icon">📊</span>
+      <span class="section-label-text">今週の決算予定</span>
+      <span class="section-label-line"></span>
+    </div>
+
+    <div class="earnings-grid">
+      <div class="earnings-item" data-ticker="ADBE">
+        <div class="earnings-item-header">
+          <span class="earnings-item-ticker">ADBE</span>
+          <span class="earnings-item-timing amc">引け後</span>
+        </div>
+        <div class="earnings-item-name">Adobe Inc.</div>
+        <span class="earnings-item-sector">ソフトウェア</span>
+        <div class="earnings-item-consensus">
+          <span>EPS予: $4.97</span>
+          <span>売上予: $5.63B</span>
+        </div>
+      </div>
+      <div class="earnings-item" data-ticker="ULTA">
+        <div class="earnings-item-header">
+          <span class="earnings-item-ticker">ULTA</span>
+          <span class="earnings-item-timing amc">引け後</span>
+        </div>
+        <div class="earnings-item-name">Ulta Beauty</div>
+        <span class="earnings-item-sector">小売（美容）</span>
+        <div class="earnings-item-consensus">
+          <span>EPS予: $8.12</span>
+          <span>売上予: $3.46B</span>
+        </div>
+      </div>
+      <div class="earnings-item" data-ticker="DG">
+        <div class="earnings-item-header">
+          <span class="earnings-item-ticker">DG</span>
+          <span class="earnings-item-timing bmo">寄り前</span>
+        </div>
+        <div class="earnings-item-name">Dollar General</div>
+        <span class="earnings-item-sector">小売（ディスカウント）</span>
+        <div class="earnings-item-consensus">
+          <span>EPS予: $1.50</span>
+          <span>売上予: $10.2B</span>
+        </div>
+      </div>
+      <div class="earnings-item" data-ticker="BURL">
+        <div class="earnings-item-header">
+          <span class="earnings-item-ticker">BURL</span>
+          <span class="earnings-item-timing bmo">寄り前</span>
+        </div>
+        <div class="earnings-item-name">Burlington Stores</div>
+        <span class="earnings-item-sector">小売（アパレル）</span>
+        <div class="earnings-item-consensus">
+          <span>EPS予: $4.35</span>
+          <span>売上予: $3.18B</span>
+        </div>
+      </div>
+      <div class="earnings-item" data-ticker="LEN">
+        <div class="earnings-item-header">
+          <span class="earnings-item-ticker">LEN</span>
+          <span class="earnings-item-timing amc">引け後</span>
+        </div>
+        <div class="earnings-item-name">Lennar Corp.</div>
+        <span class="earnings-item-sector">住宅建設</span>
+        <div class="earnings-item-consensus">
+          <span>EPS予: $2.48</span>
+          <span>売上予: $7.85B</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Theme Toggle
+(function() {
+  var toggle = document.getElementById('themeToggle');
+  var html = document.documentElement;
+
+  // localStorage から前回のテーマを復元
+  var saved = localStorage.getItem('morning-theme');
+  if (saved) {
+    html.setAttribute('data-theme', saved);
+    toggle.textContent = saved === 'dark' ? '☀️' : '🌙';
+  }
+
+  toggle.addEventListener('click', function() {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('morning-theme', next);
+  });
+})();
+
+// 日付・版の動的生成
+(function() {
+  var now = new Date();
+  var weekdays = ['日','月','火','水','木','金','土'];
+  var y = now.getFullYear();
+  var m = now.getMonth() + 1;
+  var d = now.getDate();
+  var w = weekdays[now.getDay()];
+  var h = now.getHours();
+
+  document.getElementById('paperDate').textContent = y + '年' + m + '月' + d + '日（' + w + '曜日）';
+
+  var edition = h < 12 ? '朝刊' : h < 18 ? '午後版' : '夕刊';
+  document.getElementById('paperEdition').textContent = edition;
+})();
+
+// 決算プレビュー — ポータルに過去データがある銘柄に自動リンク
+(function() {
+  var portalBase = 'https://yskzz121.github.io/ui-kabu-reports/';
+  // ポータルに存在する銘柄一覧（deploy_report.pyが管理するディレクトリと同期）
+  var portalTickers = [
+    'ADBE','ADI','ALAB','AMZN','AVGO','CIEN','COST','DDOG',
+    'FN','GOOGL','IOT','LLY','META','MRVL','MSFT','MU',
+    'NVDA','OKTA','ORCL','PANW','PATH','RBRK','RDDT',
+    'S','SNAP','TSLA','TXN','ZS'
+  ];
+
+  document.querySelectorAll('.earnings-item[data-ticker]').forEach(function(item) {
+    var ticker = item.getAttribute('data-ticker');
+    if (portalTickers.indexOf(ticker) !== -1) {
+      var link = document.createElement('a');
+      link.href = portalBase + ticker + '/';
+      link.target = '_blank';
+      link.className = 'earnings-item-link';
+      link.innerHTML = '📊 過去の決算分析を見る →';
+      item.appendChild(link);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
