@@ -1039,10 +1039,13 @@ a.content-card { text-decoration: none; color: inherit; }
 
 /* Auth demo controls (dev only) */
 .auth-demo {
-  position: fixed; bottom: 16px; right: 16px; z-index: 999;
+  position: fixed; bottom: 76px; right: 16px; z-index: 9999;
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
   padding: 14px 18px; box-shadow: 0 4px 12px rgba(0,0,0,.15);
   font-size: 12px;
+}
+@media (min-width: 768px) {
+  .auth-demo { bottom: 16px; }
 }
 .auth-demo-title { font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; }
 .auth-demo-btns { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -1117,8 +1120,9 @@ a.content-card { text-decoration: none; color: inherit; }
   .video-grid { grid-template-columns: 1fr; }
   .cross-report-card { flex-direction: column; text-align: center; }
   .upgrade-banner { flex-direction: column; text-align: center; }
-  .auth-demo { bottom: 70px; right: 8px; left: 8px; }
+  .auth-demo { bottom: 76px; right: 8px; left: 8px; }
   .auth-demo-btns { justify-content: center; }
+  .bottom-nav { z-index: 100; }
 }
 
 /* ==========================================
@@ -2105,23 +2109,21 @@ a.content-card { text-decoration: none; color: inherit; }
 <!-- ===== Bottom Navigation ===== -->
 <nav class="bottom-nav">
   <div class="bottom-nav-inner">
-    <a href="#" class="bottom-nav-item active">
+    <a href="index.html" class="bottom-nav-item active">
       <span class="bottom-nav-icon">🏠</span>ホーム
     </a>
-    <a href="#" class="bottom-nav-item">
+    <a href="https://yskzz121.github.io/ui-kabu-times/" class="bottom-nav-item">
       <span class="bottom-nav-icon">☀️</span>朝刊
     </a>
-    <a href="#" class="bottom-nav-item">
+    <a href="https://yskzz121.github.io/ui-kabu-reports/" class="bottom-nav-item">
       <span class="bottom-nav-icon">📊</span>決算
     </a>
-    <a href="#" class="bottom-nav-item">
-      <span class="bottom-nav-icon">📖</span>教科書
-    </a>
-    <a href="#" class="bottom-nav-item">
-      <span class="bottom-nav-icon">👤</span>マイページ
+    <a href="https://yskzz121.github.io/ui-kabu-times/glossary/" class="bottom-nav-item">
+      <span class="bottom-nav-icon">📖</span>用語辞典
     </a>
     <a href="settings.html" class="bottom-nav-item">
       <span class="bottom-nav-icon">⚙️</span>設定
+    </a>
   </div>
 </nav>
 
