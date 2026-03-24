@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>設定 | U&I 株倶楽部</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================
+   CSS Custom Properties
+   ========================================== */
+:root {
+  --font-sans: 'Noto Sans JP', 'Inter', -apple-system, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition: .25s cubic-bezier(.4,0,.2,1);
+  --max-w: 720px;
+  --brand-gradient: linear-gradient(135deg, #da3633, #f5a623);
+  --gold: #d4a843;
+  --gold-bg: rgba(212,168,67,.1);
+  --gold-border: rgba(212,168,67,.3);
+}
+
+/* ===== Dark theme ===== */
+[data-theme="dark"] {
+  --bg-primary: #0d1117;
+  --bg-card: #161b22;
+  --bg-card-hover: #21262d;
+  --bg-input: #0d1117;
+  --bg-nav: rgba(13,17,23,.92);
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --border: #30363d;
+  --accent: #58a6ff;
+  --accent-light: rgba(56,139,253,.12);
+  --accent-green: #3fb950;
+  --accent-green-light: rgba(63,185,80,.12);
+  --accent-red: #da3633;
+  --accent-red-light: rgba(218,54,51,.12);
+  --shadow-card: 0 2px 8px rgba(0,0,0,.3);
+}
+
+/* ===== Light theme ===== */
+[data-theme="light"] {
+  --bg-primary: #f6f8fa;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f3f4f6;
+  --bg-input: #f6f8fa;
+  --bg-nav: rgba(246,248,250,.92);
+  --text-primary: #1f2328;
+  --text-secondary: #656d76;
+  --text-muted: #8b949e;
+  --border: #d0d7de;
+  --accent: #0969da;
+  --accent-light: rgba(9,105,218,.1);
+  --accent-green: #1a7f37;
+  --accent-green-light: rgba(26,127,55,.1);
+  --accent-red: #cf222e;
+  --accent-red-light: rgba(207,34,46,.1);
+  --shadow-card: 0 1px 3px rgba(27,31,36,.06), 0 2px 8px rgba(27,31,36,.04);
+}
+
+/* ==========================================
+   Reset & Base
+   ========================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  transition: background var(--transition), color var(--transition);
+  min-height: 100vh;
+}
+
+/* ==========================================
+   Top Navigation
+   ========================================== */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.top-nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 20px;
+  height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text-primary);
+}
+.logo-img { height: 50px; width: auto; }
+[data-theme="dark"] .logo-img { filter: invert(1); }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.theme-toggle {
+  width: 40px; height: 40px; border: none; background: transparent;
+  border-radius: var(--radius-sm); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); font-size: 20px;
+  transition: background var(--transition);
+}
+.theme-toggle:hover { background: var(--border); }
+.back-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--accent);
+  text-decoration: none; transition: opacity .15s;
+}
+.back-btn:hover { opacity: .7; }
+.back-btn svg { width: 16px; height: 16px; }
+
+/* ==========================================
+   Page Layout
+   ========================================== */
+.page {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 84px 20px 60px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+.page-title {
+  font-size: 26px; font-weight: 800; letter-spacing: -.02em;
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 14px; color: var(--text-secondary);
+}
+
+/* ==========================================
+   Sidebar + Content (Desktop)
+   ========================================== */
+.settings-layout {
+  display: flex; gap: 32px;
+}
+.settings-sidebar {
+  width: 180px; flex-shrink: 0;
+  position: sticky; top: 84px; align-self: flex-start;
+}
+.sidebar-nav {
+  list-style: none; display: flex; flex-direction: column; gap: 2px;
+}
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; color: var(--text-secondary);
+  text-decoration: none; transition: all .15s;
+}
+.sidebar-nav a:hover {
+  background: var(--bg-card-hover); color: var(--text-primary);
+}
+.sidebar-nav a.active {
+  background: var(--accent-light); color: var(--accent);
+}
+.sidebar-nav .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+.settings-content { flex: 1; min-width: 0; }
+
+/* ==========================================
+   Settings Section Card
+   ========================================== */
+.settings-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+}
+.settings-section-title {
+  font-size: 16px; font-weight: 700; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.settings-section-title .sec-icon { font-size: 18px; }
+
+/* ==========================================
+   Profile Section
+   ========================================== */
+.profile-row {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 24px;
+}
+.profile-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--brand-gradient);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 24px; font-weight: 800;
+  flex-shrink: 0; position: relative;
+}
+.avatar-edit-btn {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bg-card); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; cursor: pointer; transition: all .15s;
+}
+.avatar-edit-btn:hover { border-color: var(--accent); }
+.profile-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.profile-avatar.has-img {
+  background: none;
+}
+
+/* Avatar upload modal */
+.avatar-modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.avatar-modal-overlay.open {
+  opacity: 1; pointer-events: auto;
+}
+.avatar-modal {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 32px;
+  width: 90%; max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  transform: translateY(16px); transition: transform .25s;
+}
+.avatar-modal-overlay.open .avatar-modal {
+  transform: translateY(0);
+}
+.avatar-modal-title {
+  font-size: 16px; font-weight: 700; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.avatar-modal-close {
+  width: 32px; height: 32px; border: none; background: transparent;
+  color: var(--text-muted); font-size: 18px; cursor: pointer;
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.avatar-modal-close:hover { background: var(--bg-card-hover); }
+
+.avatar-dropzone {
+  border: 2px dashed var(--border); border-radius: var(--radius-md);
+  padding: 32px 20px; text-align: center;
+  cursor: pointer; transition: all .2s;
+  position: relative;
+}
+.avatar-dropzone:hover, .avatar-dropzone.dragover {
+  border-color: var(--accent); background: var(--accent-light);
+}
+.avatar-dropzone-icon { font-size: 36px; margin-bottom: 10px; }
+.avatar-dropzone-text {
+  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+}
+.avatar-dropzone-text strong {
+  color: var(--accent); font-weight: 600;
+}
+.avatar-dropzone-hint {
+  font-size: 11px; color: var(--text-muted); margin-top: 6px;
+}
+.avatar-dropzone input[type="file"] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer;
+}
+
+/* Preview in modal */
+.avatar-preview-area {
+  display: none; text-align: center; margin-top: 16px;
+}
+.avatar-preview-area.active { display: block; }
+.avatar-preview-img {
+  width: 120px; height: 120px; border-radius: 50%;
+  object-fit: cover; border: 3px solid var(--border);
+  margin: 0 auto 16px;
+  display: block;
+}
+.avatar-preview-name {
+  font-size: 12px; color: var(--text-muted); margin-bottom: 12px;
+  word-break: break-all;
+}
+
+.profile-info { flex: 1; }
+.profile-name {
+  font-size: 18px; font-weight: 700;
+}
+.profile-email {
+  font-size: 13px; color: var(--text-secondary);
+}
+.profile-plan-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; padding: 3px 10px;
+  border-radius: 6px; margin-top: 6px;
+}
+.profile-plan-badge.free {
+  background: rgba(139,148,158,.15); color: var(--text-secondary);
+}
+.profile-plan-badge.premium {
+  background: var(--gold-bg); color: var(--gold);
+  border: 1px solid var(--gold-border);
+}
+
+/* ==========================================
+   Form Elements
+   ========================================== */
+.form-group {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: var(--text-secondary); margin-bottom: 6px;
+}
+.form-input {
+  width: 100%; padding: 10px 14px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text-primary);
+  font-size: 14px; font-family: var(--font-sans);
+  transition: border-color .15s;
+}
+.form-input:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.form-input:disabled {
+  opacity: .5; cursor: not-allowed;
+}
+.form-hint {
+  font-size: 12px; color: var(--text-muted); margin-top: 4px;
+}
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+
+/* Select */
+.form-select {
+  width: 100%; padding: 10px 14px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text-primary);
+  font-size: 14px; font-family: var(--font-sans);
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b949e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  transition: border-color .15s;
+}
+.form-select:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* Toggle Switch */
+.toggle-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label {
+  flex: 1;
+}
+.toggle-label-title {
+  font-size: 14px; font-weight: 600; color: var(--text-primary);
+}
+.toggle-label-desc {
+  font-size: 12px; color: var(--text-muted); margin-top: 2px;
+}
+
+.toggle-switch {
+  position: relative; width: 44px; height: 24px; flex-shrink: 0; margin-left: 16px;
+}
+.toggle-switch input {
+  opacity: 0; width: 0; height: 0; position: absolute;
+}
+.toggle-slider {
+  position: absolute; inset: 0; cursor: pointer;
+  background: var(--border); border-radius: 12px;
+  transition: background .2s;
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; transition: transform .2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--accent);
+}
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(20px);
+}
+
+/* ==========================================
+   Buttons
+   ========================================== */
+.btn {
+  padding: 10px 24px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 700; font-family: var(--font-sans);
+  cursor: pointer; transition: all .15s; border: none;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary {
+  background: var(--accent); color: #0d1117;
+}
+.btn-primary:hover { opacity: .85; }
+.btn-outline {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+.btn-outline:hover { background: var(--bg-card-hover); border-color: var(--text-muted); }
+.btn-danger {
+  background: transparent; border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+}
+.btn-danger:hover { background: var(--accent-red-light); }
+.btn-gold {
+  background: var(--gold); color: #0d1117;
+}
+.btn-gold:hover { opacity: .85; }
+
+.btn-group {
+  display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;
+}
+
+/* ==========================================
+   Plan Card
+   ========================================== */
+.plan-card {
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 20px; transition: border-color .2s;
+}
+.plan-card.current {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.plan-card.premium-plan {
+  border-color: var(--gold-border);
+  background: var(--gold-bg);
+}
+.plan-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.plan-card-name {
+  font-size: 16px; font-weight: 800;
+}
+.plan-card-price {
+  font-size: 14px; font-weight: 700; color: var(--text-secondary);
+}
+.plan-card-price strong {
+  font-size: 24px; color: var(--text-primary);
+  font-family: 'Inter', var(--font-sans);
+}
+.plan-card-features {
+  list-style: none; margin-top: 12px;
+}
+.plan-card-features li {
+  font-size: 13px; color: var(--text-secondary);
+  padding: 4px 0; display: flex; align-items: center; gap: 8px;
+}
+.plan-card-features li::before {
+  content: '✓'; color: var(--accent-green); font-weight: 700; font-size: 12px;
+}
+.plan-cards-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* ==========================================
+   Connected Accounts
+   ========================================== */
+.connected-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.connected-row:last-child { border-bottom: none; }
+.connected-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.connected-icon.google { background: rgba(66,133,244,.12); }
+.connected-icon.line { background: rgba(6,199,85,.12); }
+.connected-icon.email { background: var(--accent-light); }
+.connected-info { flex: 1; }
+.connected-name { font-size: 14px; font-weight: 600; }
+.connected-detail { font-size: 12px; color: var(--text-muted); }
+.connected-badge {
+  font-size: 11px; font-weight: 600; padding: 3px 10px;
+  border-radius: 6px; background: var(--accent-green-light);
+  color: var(--accent-green);
+}
+
+/* ==========================================
+   Danger Zone
+   ========================================== */
+.danger-zone {
+  border-color: rgba(218,54,51,.25);
+}
+.danger-zone .settings-section-title {
+  color: var(--accent-red);
+  border-bottom-color: rgba(218,54,51,.2);
+}
+.danger-item {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.danger-item:last-child { border-bottom: none; }
+.danger-item-text {
+  flex: 1;
+}
+.danger-item-title {
+  font-size: 14px; font-weight: 600;
+}
+.danger-item-desc {
+  font-size: 12px; color: var(--text-muted); margin-top: 2px;
+}
+
+/* ==========================================
+   Toast notification
+   ========================================== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--bg-card); border: 1px solid var(--accent-green);
+  border-radius: var(--radius-sm); padding: 12px 24px;
+  font-size: 13px; font-weight: 600; color: var(--accent-green);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+  opacity: 0; transition: all .3s ease; z-index: 999;
+  display: flex; align-items: center; gap: 8px;
+}
+.toast.show {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+@media (max-width: 767px) {
+  .settings-layout { flex-direction: column; gap: 0; }
+  .settings-sidebar {
+    position: static; width: 100%;
+    margin-bottom: 20px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .sidebar-nav {
+    flex-direction: row; gap: 4px;
+    padding-bottom: 4px;
+  }
+  .sidebar-nav a {
+    padding: 8px 14px; white-space: nowrap; font-size: 12px;
+    border: 1px solid var(--border); border-radius: 100px;
+  }
+  .sidebar-nav a.active {
+    border-color: var(--accent);
+  }
+  .page { padding: 76px 16px 40px; }
+  .page-title { font-size: 22px; }
+  .settings-section { padding: 20px 16px; }
+  .form-row { grid-template-columns: 1fr; }
+  .plan-cards-grid { grid-template-columns: 1fr; }
+  .profile-row { flex-direction: column; text-align: center; }
+  .profile-avatar { margin: 0 auto; }
+  .danger-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+@media (min-width: 768px) {
+  .page { padding: 92px 40px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Top Navigation ===== -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="prototype.html" class="logo">
+      <img src="U&Ikabukura_logo.png" alt="U&I 株倶楽部" class="logo-img">
+    </a>
+    <div class="nav-actions">
+      <a href="prototype.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        ポータルに戻る
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">☀️</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Page ===== -->
+<div class="page">
+
+  <div class="page-header">
+    <h1 class="page-title">設定</h1>
+    <p class="page-subtitle">アカウント情報や通知設定を管理します</p>
+  </div>
+
+  <div class="settings-layout">
+
+    <!-- Sidebar -->
+    <nav class="settings-sidebar">
+      <ul class="sidebar-nav">
+        <li><a href="#sec-profile" class="active"><span class="nav-icon">👤</span> プロフィール</a></li>
+        <li><a href="#sec-plan"><span class="nav-icon">⭐</span> プラン</a></li>
+        <li><a href="#sec-notify"><span class="nav-icon">🔔</span> 通知</a></li>
+        <li><a href="#sec-display"><span class="nav-icon">🎨</span> 表示</a></li>
+        <li><a href="#sec-connected"><span class="nav-icon">🔗</span> 連携</a></li>
+        <li><a href="#sec-danger"><span class="nav-icon">⚠️</span> アカウント</a></li>
+      </ul>
+    </nav>
+
+    <!-- Content -->
+    <div class="settings-content">
+
+      <!-- Profile -->
+      <section class="settings-section" id="sec-profile">
+        <h2 class="settings-section-title"><span class="sec-icon">👤</span> プロフィール</h2>
+        <div class="profile-row">
+          <div class="profile-avatar" id="settingsAvatar">
+            YS
+            <span class="avatar-edit-btn">📷</span>
+          </div>
+          <div class="profile-info">
+            <div class="profile-name" id="settingsName">Yさん</div>
+            <div class="profile-email" id="settingsEmail">y@example.com</div>
+            <span class="profile-plan-badge premium" id="settingsPlanBadge">⭐ PRO</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">表示名</label>
+            <input type="text" class="form-input" value="Yさん" id="inputDisplayName">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ユーザーID</label>
+            <input type="text" class="form-input" value="@y_kabu" disabled>
+            <span class="form-hint">変更不可</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">メールアドレス</label>
+          <input type="email" class="form-input" value="y@example.com" id="inputEmail">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">自己紹介</label>
+          <textarea class="form-input" rows="3" style="resize:vertical" placeholder="自己紹介を入力（任意）"></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="showToast('プロフィールを保存しました')">変更を保存</button>
+        </div>
+      </section>
+
+      <!-- Plan -->
+      <section class="settings-section" id="sec-plan">
+        <h2 class="settings-section-title"><span class="sec-icon">⭐</span> プラン管理</h2>
+
+        <div class="plan-cards-grid">
+          <div class="plan-card" id="planFree">
+            <div class="plan-card-header">
+              <span class="plan-card-name">Free プラン</span>
+              <span class="plan-card-price"><strong>¥0</strong>/月</span>
+            </div>
+            <ul class="plan-card-features">
+              <li>朝刊（当日分のみ）</li>
+              <li>Big 6 銘柄の決算分析</li>
+              <li>市場概況ダッシュボード</li>
+            </ul>
+          </div>
+
+          <div class="plan-card premium-plan current" id="planPremium">
+            <div class="plan-card-header">
+              <span class="plan-card-name" style="color:var(--gold)">⭐ Pro プラン</span>
+              <span class="plan-card-price"><strong>¥980</strong>/月</span>
+            </div>
+            <ul class="plan-card-features">
+              <li>全銘柄の決算分析（30〜50社/期）</li>
+              <li>朝刊アーカイブ</li>
+              <li>投資の教科書（全31レッスン）</li>
+              <li>限定動画・クロス分析レポート</li>
+              <li>オフライン交流会参加</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-outline" id="planActionBtn">プランを変更</button>
+          <button class="btn btn-outline">請求履歴を見る</button>
+        </div>
+
+        <div class="form-group" style="margin-top:18px">
+          <label class="form-label">次回更新日</label>
+          <input type="text" class="form-input" value="2026年4月13日" disabled>
+        </div>
+        <div class="form-group">
+          <label class="form-label">支払い方法</label>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <input type="text" class="form-input" value="**** **** **** 4242" disabled style="flex:1">
+            <button class="btn btn-outline" style="white-space:nowrap">変更</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section class="settings-section" id="sec-notify">
+        <h2 class="settings-section-title"><span class="sec-icon">🔔</span> 通知設定</h2>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">朝刊配信通知</div>
+            <div class="toggle-label-desc">毎朝の朝刊が公開されたらメールでお知らせ</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">決算レポート通知</div>
+            <div class="toggle-label-desc">新しい決算分析レポートが公開されたらお知らせ</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">決算カレンダーリマインダー</div>
+            <div class="toggle-label-desc">注目銘柄の決算発表前日にリマインド</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">市場暴落アラート</div>
+            <div class="toggle-label-desc">暴落リスクメーターが「高リスク」以上になったら通知</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">限定動画・新コンテンツ</div>
+            <div class="toggle-label-desc">新しい動画やクロス分析レポートの通知</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">プロモーション・お知らせ</div>
+            <div class="toggle-label-desc">キャンペーンやイベント情報</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-top:18px">
+          <label class="form-label">通知の配信先</label>
+          <select class="form-select">
+            <option>メールのみ</option>
+            <option>LINE のみ</option>
+            <option selected>メール + LINE</option>
+          </select>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="showToast('通知設定を保存しました')">変更を保存</button>
+        </div>
+      </section>
+
+      <!-- Display -->
+      <section class="settings-section" id="sec-display">
+        <h2 class="settings-section-title"><span class="sec-icon">🎨</span> 表示設定</h2>
+
+        <div class="form-group">
+          <label class="form-label">テーマ</label>
+          <select class="form-select" id="selectTheme">
+            <option value="dark">ダークモード</option>
+            <option value="light">ライトモード</option>
+            <option value="system">システム設定に従う</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">デフォルトの市場タブ</label>
+          <select class="form-select">
+            <option selected>主要指数</option>
+            <option>センチメント</option>
+            <option>金利・為替</option>
+            <option>コモディティ</option>
+            <option>主要銘柄</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">通貨表示</label>
+          <select class="form-select">
+            <option selected>USD（$）</option>
+            <option>JPY（¥）</option>
+          </select>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">決算カレンダーを表示</div>
+            <div class="toggle-label-desc">ポータル上に今週の決算カレンダーを表示する</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">セクターヒートマップを表示</div>
+            <div class="toggle-label-desc">S&P 500 セクター別パフォーマンスを表示する</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <div class="toggle-label-title">チャートポップアップ</div>
+            <div class="toggle-label-desc">銘柄カードホバー時にTradingViewミニチャートを表示</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="showToast('表示設定を保存しました')">変更を保存</button>
+        </div>
+      </section>
+
+      <!-- Connected Accounts -->
+      <section class="settings-section" id="sec-connected">
+        <h2 class="settings-section-title"><span class="sec-icon">🔗</span> 連携アカウント</h2>
+
+        <div class="connected-row">
+          <div class="connected-icon google">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </div>
+          <div class="connected-info">
+            <div class="connected-name">Google</div>
+            <div class="connected-detail">y@gmail.com</div>
+          </div>
+          <span class="connected-badge">接続済み</span>
+        </div>
+
+        <div class="connected-row">
+          <div class="connected-icon line">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#06C755" d="M12 2C6.48 2 2 5.82 2 10.5c0 4.21 3.74 7.74 8.79 8.4.34.07.81.23.93.52.1.27.07.68.03.95l-.15.89c-.05.27-.21 1.07.94.58 1.14-.49 6.17-3.63 8.42-6.22C22.86 13.42 22 11.92 22 10.5 22 5.82 17.52 2 12 2z"/></svg>
+          </div>
+          <div class="connected-info">
+            <div class="connected-name">LINE</div>
+            <div class="connected-detail">U&I株倶楽部グループに通知連携中</div>
+          </div>
+          <span class="connected-badge">接続済み</span>
+        </div>
+
+        <div class="connected-row">
+          <div class="connected-icon email">📧</div>
+          <div class="connected-info">
+            <div class="connected-name">メール</div>
+            <div class="connected-detail">y@example.com</div>
+          </div>
+          <button class="btn btn-outline" style="padding:6px 14px;font-size:12px">変更</button>
+        </div>
+      </section>
+
+      <!-- Danger Zone -->
+      <section class="settings-section danger-zone" id="sec-danger">
+        <h2 class="settings-section-title"><span class="sec-icon">⚠️</span> アカウント</h2>
+
+        <div class="danger-item">
+          <div class="danger-item-text">
+            <div class="danger-item-title">パスワードを変更</div>
+            <div class="danger-item-desc">セキュリティのため定期的な変更を推奨します</div>
+          </div>
+          <button class="btn btn-outline">変更する</button>
+        </div>
+
+        <div class="danger-item">
+          <div class="danger-item-text">
+            <div class="danger-item-title">データをエクスポート</div>
+            <div class="danger-item-desc">お気に入りや設定情報をJSON形式でダウンロード</div>
+          </div>
+          <button class="btn btn-outline">エクスポート</button>
+        </div>
+
+        <div class="danger-item">
+          <div class="danger-item-text">
+            <div class="danger-item-title">ログアウト</div>
+            <div class="danger-item-desc">現在のセッションからログアウトします</div>
+          </div>
+          <button class="btn btn-danger" onclick="if(confirm('ログアウトしますか？')) location.href='prototype.html'">ログアウト</button>
+        </div>
+
+        <div class="danger-item">
+          <div class="danger-item-text">
+            <div class="danger-item-title">アカウントを削除</div>
+            <div class="danger-item-desc">すべてのデータが永久に削除されます。この操作は取り消せません</div>
+          </div>
+          <button class="btn btn-danger" onclick="alert('プロトタイプのため、この機能は無効です')">削除する</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- Avatar Upload Modal -->
+<div class="avatar-modal-overlay" id="avatarModal">
+  <div class="avatar-modal">
+    <div class="avatar-modal-title">
+      プロフィール画像を変更
+      <button class="avatar-modal-close" onclick="closeAvatarModal()">✕</button>
+    </div>
+    <div class="avatar-dropzone" id="avatarDropzone">
+      <div class="avatar-dropzone-icon">📷</div>
+      <div class="avatar-dropzone-text">ここに画像をドロップ<br>または<strong>クリックして選択</strong></div>
+      <div class="avatar-dropzone-hint">JPG, PNG, GIF, WebP — 最大 5MB</div>
+      <input type="file" id="avatarFileInput" accept="image/jpeg,image/png,image/gif,image/webp">
+    </div>
+    <div class="avatar-preview-area" id="avatarPreviewArea">
+      <img class="avatar-preview-img" id="avatarPreviewImg" src="" alt="プレビュー">
+      <div class="avatar-preview-name" id="avatarPreviewName"></div>
+      <div class="btn-group" style="justify-content:center">
+        <button class="btn btn-primary" onclick="applyAvatar()">この画像を使う</button>
+        <button class="btn btn-outline" onclick="resetAvatarPreview()">選び直す</button>
+      </div>
+    </div>
+    <div style="margin-top:16px;text-align:center">
+      <button class="btn btn-danger" id="avatarRemoveBtn" style="display:none" onclick="removeAvatar()">画像を削除してイニシャルに戻す</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// Theme Toggle
+var toggle = document.getElementById('themeToggle');
+var html = document.documentElement;
+var selectTheme = document.getElementById('selectTheme');
+
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  if (selectTheme) selectTheme.value = theme;
+}
+
+toggle.addEventListener('click', function() {
+  setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+selectTheme.addEventListener('change', function() {
+  var val = this.value;
+  if (val === 'system') {
+    val = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  setTheme(val);
+});
+
+// Sidebar active state
+var sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+sidebarLinks.forEach(function(link) {
+  link.addEventListener('click', function() {
+    sidebarLinks.forEach(function(l) { l.classList.remove('active'); });
+    this.classList.add('active');
+  });
+});
+
+// Scroll spy
+var sections = document.querySelectorAll('.settings-section');
+var observerOptions = { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' };
+var scrollObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var id = entry.target.id;
+      sidebarLinks.forEach(function(l) {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, observerOptions);
+sections.forEach(function(sec) { scrollObserver.observe(sec); });
+
+// Toast notification
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  toast.textContent = '✓ ' + msg;
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 2500);
+}
+
+// ==========================================
+// Avatar Upload
+// ==========================================
+var avatarData = null; // stores the data URL
+
+// Open modal
+document.querySelector('.profile-avatar').addEventListener('click', function() {
+  document.getElementById('avatarModal').classList.add('open');
+  // Show remove button if avatar is set
+  document.getElementById('avatarRemoveBtn').style.display =
+    document.getElementById('settingsAvatar').classList.contains('has-img') ? 'inline-flex' : 'none';
+});
+
+function closeAvatarModal() {
+  document.getElementById('avatarModal').classList.remove('open');
+  resetAvatarPreview();
+}
+
+// Close on overlay click
+document.getElementById('avatarModal').addEventListener('click', function(e) {
+  if (e.target === this) closeAvatarModal();
+});
+
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeAvatarModal();
+});
+
+// File input change
+document.getElementById('avatarFileInput').addEventListener('change', function(e) {
+  handleAvatarFile(e.target.files[0]);
+});
+
+// Drag & drop
+var dropzone = document.getElementById('avatarDropzone');
+dropzone.addEventListener('dragover', function(e) {
+  e.preventDefault(); this.classList.add('dragover');
+});
+dropzone.addEventListener('dragleave', function() {
+  this.classList.remove('dragover');
+});
+dropzone.addEventListener('drop', function(e) {
+  e.preventDefault(); this.classList.remove('dragover');
+  var file = e.dataTransfer.files[0];
+  if (file) handleAvatarFile(file);
+});
+
+function handleAvatarFile(file) {
+  if (!file) return;
+
+  // Validate type
+  var allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+  if (allowed.indexOf(file.type) < 0) {
+    alert('対応形式: JPG, PNG, GIF, WebP');
+    return;
+  }
+
+  // Validate size (5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    alert('ファイルサイズは5MB以下にしてください');
+    return;
+  }
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    avatarData = e.target.result;
+    document.getElementById('avatarPreviewImg').src = avatarData;
+    document.getElementById('avatarPreviewName').textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+    document.getElementById('avatarPreviewArea').classList.add('active');
+    document.getElementById('avatarDropzone').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetAvatarPreview() {
+  avatarData = null;
+  document.getElementById('avatarPreviewArea').classList.remove('active');
+  document.getElementById('avatarDropzone').style.display = 'block';
+  document.getElementById('avatarFileInput').value = '';
+}
+
+function applyAvatar() {
+  if (!avatarData) return;
+
+  var avatarEl = document.getElementById('settingsAvatar');
+  avatarEl.innerHTML = '<img src="' + avatarData + '" alt="アバター"><span class="avatar-edit-btn">📷</span>';
+  avatarEl.classList.add('has-img');
+
+  // Save to localStorage for persistence
+  try { localStorage.setItem('ui-kabu-avatar', avatarData); } catch(e) {}
+
+  closeAvatarModal();
+  showToast('プロフィール画像を更新しました');
+}
+
+function removeAvatar() {
+  var avatarEl = document.getElementById('settingsAvatar');
+  avatarEl.innerHTML = 'YS<span class="avatar-edit-btn">📷</span>';
+  avatarEl.classList.remove('has-img');
+
+  try { localStorage.removeItem('ui-kabu-avatar'); } catch(e) {}
+
+  closeAvatarModal();
+  showToast('プロフィール画像を削除しました');
+}
+
+// Restore avatar from localStorage on load
+(function() {
+  try {
+    var saved = localStorage.getItem('ui-kabu-avatar');
+    if (saved) {
+      var avatarEl = document.getElementById('settingsAvatar');
+      avatarEl.innerHTML = '<img src="' + saved + '" alt="アバター"><span class="avatar-edit-btn">📷</span>';
+      avatarEl.classList.add('has-img');
+    }
+  } catch(e) {}
+})();
+</script>
+
+</body>
+</html>

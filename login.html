@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログイン | U&I株倶楽部</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d1117;
+  --bg-card: #161b22;
+  --bg-input: #0d1117;
+  --border: #30363d;
+  --border-focus: #58a6ff;
+  --text: #e6edf3;
+  --text-sub: #8b949e;
+  --text-muted: #484f58;
+  --accent: #58a6ff;
+  --accent-hover: #79c0ff;
+  --green: #2ea043;
+  --green-bg: rgba(46,160,67,0.12);
+  --gold: #d4a843;
+  --gold-bg: rgba(212,168,67,0.1);
+  --gold-border: rgba(212,168,67,0.3);
+  --error: #f85149;
+  --error-bg: rgba(248,81,73,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background decoration */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(88,166,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(46,160,67,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.02) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Logo area */
+.logo-area {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+.logo-area img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+/* Login card */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  gap: 0;
+}
+.auth-tab {
+  flex: 1;
+  padding: 12px 0;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--text-sub);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.auth-tab:hover { color: var(--text); }
+.auth-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Social login buttons */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 0.9em;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.social-btn:hover {
+  border-color: var(--text-sub);
+  background: rgba(255,255,255,0.03);
+}
+.social-btn svg, .social-btn img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Google button specific */
+.social-btn.google:hover { border-color: #4285f4; }
+
+/* LINE button specific */
+.social-btn.line { }
+.social-btn.line:hover { border-color: #06C755; }
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: var(--text-muted);
+  font-size: 0.78em;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 500;
+  color: var(--text-sub);
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.92em;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-input:focus {
+  border-color: var(--border-focus);
+}
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Password field */
+.password-wrapper {
+  position: relative;
+}
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 0.85em;
+  padding: 4px;
+}
+.password-toggle:hover { color: var(--text); }
+
+/* Form extras */
+.form-extras {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 0.82em;
+}
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-sub);
+  cursor: pointer;
+}
+.remember-me input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 15px;
+  height: 15px;
+}
+.forgot-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.forgot-link:hover { text-decoration: underline; }
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 13px 20px;
+  background: var(--accent);
+  color: #0d1117;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.submit-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 16px rgba(88,166,255,0.25);
+}
+
+/* Error message */
+.error-msg {
+  display: none;
+  padding: 10px 14px;
+  background: var(--error-bg);
+  border: 1px solid rgba(248,81,73,0.3);
+  border-radius: 8px;
+  color: var(--error);
+  font-size: 0.82em;
+  margin-bottom: 16px;
+}
+
+/* Register form extras */
+.form-group.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.terms {
+  font-size: 0.78em;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.terms a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.terms a:hover { text-decoration: underline; }
+
+/* Plans section (register tab) */
+.plan-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.plan-option {
+  position: relative;
+  padding: 16px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.plan-option:hover { border-color: var(--text-sub); }
+.plan-option.selected {
+  border-color: var(--accent);
+  background: rgba(88,166,255,0.06);
+}
+.plan-option.premium.selected {
+  border-color: var(--gold);
+  background: var(--gold-bg);
+}
+.plan-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.plan-name {
+  font-weight: 700;
+  font-size: 0.9em;
+  margin-bottom: 4px;
+}
+.plan-option.premium .plan-name { color: var(--gold); }
+.plan-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8em;
+  color: var(--text-sub);
+}
+.plan-price strong {
+  font-size: 1.3em;
+  color: var(--text);
+}
+.plan-option.premium .plan-price strong { color: var(--gold); }
+.plan-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--gold);
+  color: #0d1117;
+  font-size: 0.65em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* Footer */
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.82em;
+  color: var(--text-sub);
+  position: relative;
+  z-index: 1;
+}
+.login-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.login-footer a:hover { text-decoration: underline; }
+
+/* Premium benefits */
+.benefits-section {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+}
+.benefits-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+.benefits-title {
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.benefits-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.82em;
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+.benefit-icon {
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card { padding: 28px 20px; }
+  .plan-selector { grid-template-columns: 1fr; }
+  .form-group.name-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Logo -->
+<div class="logo-area">
+  <img src="U&Ikabukura_logo.png" alt="U&I株倶楽部">
+</div>
+
+<!-- Login Card -->
+<div class="login-card">
+
+  <!-- Tabs -->
+  <div class="auth-tabs">
+    <button class="auth-tab active" onclick="switchTab('login')">ログイン</button>
+    <button class="auth-tab" onclick="switchTab('register')">新規登録</button>
+  </div>
+
+  <!-- ===== LOGIN FORM ===== -->
+  <div id="login-form">
+    <!-- Social Login -->
+    <div class="social-buttons">
+      <button class="social-btn google" onclick="loginWithGoogle()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Googleでログイン
+      </button>
+      <button class="social-btn line" onclick="loginWithLINE()">
+        <svg viewBox="0 0 24 24" fill="#06C755"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEでログイン
+      </button>
+    </div>
+
+    <div class="divider">または</div>
+
+    <!-- Error -->
+    <div class="error-msg" id="login-error">メールアドレスまたはパスワードが正しくありません</div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-label" for="login-email">メールアドレス</label>
+      <input class="form-input" type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-label" for="login-password">パスワード</label>
+      <div class="password-wrapper">
+        <input class="form-input" type="password" id="login-password" placeholder="パスワードを入力" autocomplete="current-password">
+        <button class="password-toggle" type="button" onclick="togglePassword('login-password', this)">表示</button>
+      </div>
+    </div>
+
+    <!-- Extras -->
+    <div class="form-extras">
+      <label class="remember-me">
+        <input type="checkbox" checked> ログイン状態を保持
+      </label>
+      <a href="#" class="forgot-link">パスワードを忘れた方</a>
+    </div>
+
+    <!-- Submit -->
+    <button class="submit-btn" onclick="handleLogin()">ログイン</button>
+  </div>
+
+  <!-- ===== REGISTER FORM ===== -->
+  <div id="register-form" style="display:none">
+    <!-- Social Register -->
+    <div class="social-buttons">
+      <button class="social-btn google" onclick="loginWithGoogle()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Googleで登録
+      </button>
+      <button class="social-btn line" onclick="loginWithLINE()">
+        <svg viewBox="0 0 24 24" fill="#06C755"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで登録
+      </button>
+    </div>
+
+    <div class="divider">またはメールで登録</div>
+
+    <!-- Error -->
+    <div class="error-msg" id="register-error"></div>
+
+    <!-- Name -->
+    <div class="form-group name-row">
+      <div>
+        <label class="form-label" for="reg-lastname">姓</label>
+        <input class="form-input" type="text" id="reg-lastname" placeholder="山田" autocomplete="family-name">
+      </div>
+      <div>
+        <label class="form-label" for="reg-firstname">名</label>
+        <input class="form-input" type="text" id="reg-firstname" placeholder="太郎" autocomplete="given-name">
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-label" for="reg-email">メールアドレス</label>
+      <input class="form-input" type="email" id="reg-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-label" for="reg-password">パスワード</label>
+      <div class="password-wrapper">
+        <input class="form-input" type="password" id="reg-password" placeholder="8文字以上" autocomplete="new-password">
+        <button class="password-toggle" type="button" onclick="togglePassword('reg-password', this)">表示</button>
+      </div>
+    </div>
+
+    <!-- Plan Selection -->
+    <div class="form-group">
+      <label class="form-label">プラン選択</label>
+      <div class="plan-selector">
+        <label class="plan-option selected" id="plan-free" onclick="selectPlan('free')">
+          <input type="radio" name="plan" value="free" checked>
+          <div class="plan-name">無料プラン</div>
+          <div class="plan-price"><strong>¥0</strong></div>
+        </label>
+        <label class="plan-option premium" id="plan-premium" onclick="selectPlan('premium')">
+          <div class="plan-badge">おすすめ</div>
+          <input type="radio" name="plan" value="premium">
+          <div class="plan-name">有料プラン</div>
+          <div class="plan-price"><strong>¥980</strong>/月</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Terms -->
+    <div class="terms">
+      アカウントを作成することで、<a href="#">利用規約</a>および<a href="#">プライバシーポリシー</a>に同意したものとみなされます。有料プランはいつでも解約できます。
+    </div>
+
+    <!-- Submit -->
+    <button class="submit-btn" id="register-btn" onclick="handleRegister()">無料で登録する</button>
+  </div>
+
+</div>
+
+<!-- Footer: switch between login/register -->
+<div class="login-footer" id="footer-login">
+  アカウントをお持ちでない方は <a href="#" onclick="switchTab('register'); return false;">新規登録</a>
+</div>
+<div class="login-footer" id="footer-register" style="display:none">
+  すでにアカウントをお持ちの方は <a href="#" onclick="switchTab('login'); return false;">ログイン</a>
+</div>
+
+<!-- Premium Benefits -->
+<div class="benefits-section">
+  <div class="benefits-card">
+    <div class="benefits-title">有料プラン（月額¥980）でできること</div>
+    <ul class="benefits-list">
+      <li><span class="benefit-icon">📊</span>決算シーズン 30〜50本の決算分析レポート</li>
+      <li><span class="benefit-icon">📁</span>過去の決算データ・アーカイブすべてにアクセス</li>
+      <li><span class="benefit-icon">📈</span>四半期ごとの米国マーケット クロス分析レポート</li>
+      <li><span class="benefit-icon">📰</span>平日配信の経済朝刊 バックナンバー</li>
+      <li><span class="benefit-icon">🎥</span>月5〜8本の限定動画コンテンツ</li>
+      <li><span class="benefit-icon">📖</span>投資の教科書（基礎〜応用）</li>
+      <li><span class="benefit-icon">🤝</span>年数回のオフライン交流会への参加</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// Tab switching
+function switchTab(tab) {
+  var loginForm = document.getElementById('login-form');
+  var registerForm = document.getElementById('register-form');
+  var tabs = document.querySelectorAll('.auth-tab');
+  var footerLogin = document.getElementById('footer-login');
+  var footerRegister = document.getElementById('footer-register');
+
+  if (tab === 'login') {
+    loginForm.style.display = 'block';
+    registerForm.style.display = 'none';
+    tabs[0].classList.add('active');
+    tabs[1].classList.remove('active');
+    footerLogin.style.display = 'block';
+    footerRegister.style.display = 'none';
+  } else {
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'block';
+    tabs[0].classList.remove('active');
+    tabs[1].classList.add('active');
+    footerLogin.style.display = 'none';
+    footerRegister.style.display = 'block';
+  }
+}
+
+// Password visibility toggle
+function togglePassword(inputId, btn) {
+  var input = document.getElementById(inputId);
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '非表示';
+  } else {
+    input.type = 'password';
+    btn.textContent = '表示';
+  }
+}
+
+// Plan selection
+function selectPlan(plan) {
+  var free = document.getElementById('plan-free');
+  var premium = document.getElementById('plan-premium');
+  var btn = document.getElementById('register-btn');
+
+  if (plan === 'free') {
+    free.classList.add('selected');
+    premium.classList.remove('selected');
+    btn.textContent = '無料で登録する';
+  } else {
+    free.classList.remove('selected');
+    premium.classList.add('selected');
+    btn.textContent = '有料プランで登録する';
+  }
+}
+
+// Placeholder handlers (will connect to Supabase + Stripe)
+function handleLogin() {
+  // TODO: Supabase auth
+  alert('ログイン処理（Supabase連携後に実装）');
+}
+
+function handleRegister() {
+  var plan = document.querySelector('input[name="plan"]:checked').value;
+  if (plan === 'premium') {
+    // TODO: Stripe Checkout → Supabase user creation
+    alert('Stripe Checkout → 有料プラン登録（実装予定）');
+  } else {
+    // TODO: Supabase user creation
+    alert('無料プラン登録（Supabase連携後に実装）');
+  }
+}
+
+function loginWithGoogle() {
+  // TODO: Supabase Google OAuth
+  alert('Googleログイン（Supabase連携後に実装）');
+}
+
+function loginWithLINE() {
+  // TODO: Supabase LINE OIDC
+  alert('LINEログイン（Supabase連携後に実装）');
+}
+</script>
+
+</body>
+</html>
