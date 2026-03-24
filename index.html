@@ -1303,6 +1303,19 @@ a.content-card { text-decoration: none; color: inherit; }
 </head>
 <body>
 
+<!-- ===== Password Gate ===== -->
+<div id="pwGate" style="position:fixed;inset:0;z-index:2147483647;background:#0F1829;display:flex;align-items:center;justify-content:center">
+<div style="text-align:center;max-width:360px;padding:40px 32px">
+<div style="font-family:'Playfair Display',serif;font-size:32px;color:#fff;margin-bottom:4px">Atlas<span style="color:#D4A843">.</span></div>
+<div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;margin-bottom:32px">MEMBER PORTAL — PREVIEW</div>
+<input id="pwInput" type="password" placeholder="パスワードを入力" autocomplete="off"
+  style="width:100%;padding:14px 20px;border-radius:8px;border:1px solid rgba(184,145,42,0.2);background:#1A2540;color:#F5F2EC;font-family:'Noto Sans JP',sans-serif;font-size:14px;outline:none"
+  onkeydown="if(event.key==='Enter')checkPw()">
+<button onclick="checkPw()" style="margin-top:12px;width:100%;padding:12px;border:none;border-radius:8px;background:#B8912A;color:#0F1829;font-family:'Noto Sans JP',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Enter</button>
+<div id="pwError" style="margin-top:12px;font-size:12px;color:#E05555;opacity:0;transition:opacity .2s">パスワードが正しくありません</div>
+</div>
+</div>
+<div id="appContent" style="display:none">
 <!-- ===== Top Navigation ===== -->
 <nav class="top-nav">
   <div class="top-nav-inner">
@@ -2729,43 +2742,24 @@ setAuthState('guest');
 })();
 </script>
 
-<!-- Password Gate -->
-<div id="pwGate" onclick="event.stopPropagation()" style="position:fixed;inset:0;z-index:99999;background:#0F1829;display:flex;align-items:center;justify-content:center;transition:opacity .4s;cursor:default">
-<div style="text-align:center;max-width:360px;padding:40px 32px" onclick="event.stopPropagation()">
-<div style="font-family:'Playfair Display',serif;font-size:32px;color:#fff;margin-bottom:4px">Atlas<span style="color:#D4A843">.</span></div>
-<div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;margin-bottom:32px">MEMBER PORTAL — PREVIEW</div>
-<div style="position:relative">
-<input id="pwInput" type="password" placeholder="パスワードを入力" autocomplete="off"
-  style="width:100%;padding:14px 20px;border-radius:8px;border:1px solid rgba(184,145,42,0.2);background:#1A2540;color:#F5F2EC;font-family:'Noto Sans JP',sans-serif;font-size:14px;outline:none;transition:border-color .15s"
-  onfocus="this.style.borderColor='#B8912A'" onblur="this.style.borderColor='rgba(184,145,42,0.2)'"
-  onkeydown="if(event.key==='Enter')checkPw()">
-</div>
-<button onclick="checkPw()" style="margin-top:12px;width:100%;padding:12px;border:none;border-radius:8px;background:#B8912A;color:#0F1829;font-family:'Noto Sans JP',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#D4A843'" onmouseout="this.style.background='#B8912A'">Enter</button>
-<div id="pwError" style="margin-top:12px;font-size:12px;color:#E05555;opacity:0;transition:opacity .2s">パスワードが正しくありません</div>
-</div>
-</div>
+</div><!-- /appContent -->
 <script>
 (function(){
-  var gate=document.getElementById('pwGate');
   if(sessionStorage.getItem('atlas-pw-ok')==='1'){
-    gate.style.display='none';
-    document.body.style.overflow='';
-  }else{
-    document.body.style.overflow='hidden';
+    document.getElementById('pwGate').style.display='none';
+    document.getElementById('appContent').style.display='';
   }
 })();
 async function checkPw(){
   var input=document.getElementById('pwInput').value;
-  var hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(input)))).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+  var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(input));
+  var hash=Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
   if(hash==='7c82602500857aa6ed0cf38c4c3e4ec645bdcaa82c00b9155eb08be100c778a9'){
     sessionStorage.setItem('atlas-pw-ok','1');
-    var gate=document.getElementById('pwGate');
-    gate.style.opacity='0';
-    document.body.style.overflow='';
-    setTimeout(function(){gate.style.display='none'},400);
+    document.getElementById('pwGate').style.display='none';
+    document.getElementById('appContent').style.display='';
   }else{
     document.getElementById('pwError').style.opacity='1';
-    document.getElementById('pwInput').style.borderColor='#E05555';
     setTimeout(function(){document.getElementById('pwError').style.opacity='0'},2000);
   }
 }
