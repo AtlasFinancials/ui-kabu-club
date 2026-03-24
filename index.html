@@ -1796,7 +1796,7 @@ a.content-card { text-decoration: none; color: inherit; }
 <section class="panels-section fade-in">
   <div class="panels-grid">
 
-    <a href="morning.html" class="panel-card morning">
+    <a href="https://yskzz121.github.io/ui-kabu-times/" class="panel-card morning">
       <div class="panel-icon morning-bg">📰</div>
       <h3 class="panel-title">朝刊</h3>
       <p class="panel-desc">毎朝の米国株マーケットニュースをお届け</p>
@@ -2730,8 +2730,8 @@ setAuthState('guest');
 </script>
 
 <!-- Password Gate -->
-<div id="pwGate" style="position:fixed;inset:0;z-index:99999;background:#0F1829;display:flex;align-items:center;justify-content:center;transition:opacity .4s">
-<div style="text-align:center;max-width:360px;padding:40px 32px">
+<div id="pwGate" onclick="event.stopPropagation()" style="position:fixed;inset:0;z-index:99999;background:#0F1829;display:flex;align-items:center;justify-content:center;transition:opacity .4s;cursor:default">
+<div style="text-align:center;max-width:360px;padding:40px 32px" onclick="event.stopPropagation()">
 <div style="font-family:'Playfair Display',serif;font-size:32px;color:#fff;margin-bottom:4px">Atlas<span style="color:#D4A843">.</span></div>
 <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;margin-bottom:32px">MEMBER PORTAL — PREVIEW</div>
 <div style="position:relative">
@@ -2746,8 +2746,12 @@ setAuthState('guest');
 </div>
 <script>
 (function(){
+  var gate=document.getElementById('pwGate');
   if(sessionStorage.getItem('atlas-pw-ok')==='1'){
-    document.getElementById('pwGate').style.display='none';
+    gate.style.display='none';
+    document.body.style.overflow='';
+  }else{
+    document.body.style.overflow='hidden';
   }
 })();
 async function checkPw(){
@@ -2757,6 +2761,7 @@ async function checkPw(){
     sessionStorage.setItem('atlas-pw-ok','1');
     var gate=document.getElementById('pwGate');
     gate.style.opacity='0';
+    document.body.style.overflow='';
     setTimeout(function(){gate.style.display='none'},400);
   }else{
     document.getElementById('pwError').style.opacity='1';
