@@ -3,35 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ログイン | U&I株倶楽部</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Atlas — ログイン</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0d1117;
-  --bg-card: #161b22;
-  --bg-input: #0d1117;
-  --border: #30363d;
-  --border-focus: #58a6ff;
-  --text: #e6edf3;
-  --text-sub: #8b949e;
-  --text-muted: #484f58;
-  --accent: #58a6ff;
-  --accent-hover: #79c0ff;
-  --green: #2ea043;
-  --green-bg: rgba(46,160,67,0.12);
-  --gold: #d4a843;
-  --gold-bg: rgba(212,168,67,0.1);
-  --gold-border: rgba(212,168,67,0.3);
-  --error: #f85149;
-  --error-bg: rgba(248,81,73,0.1);
+  --navy: #1A2540;
+  --gold: #B8912A;
+  --paper: #F5F2EC;
+  --card-bg: #FDFCFA;
+  --border: #ECE8DF;
+  --text: #1A2540;
+  --text-sub: #6B6358;
+  --text-muted: #9E978D;
+  --gold-hover: #D4A843;
+  --error: #C0392B;
+  --error-bg: rgba(192,57,43,0.06);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
-  background: var(--bg);
+  background-color: var(--paper);
   color: var(--text);
   min-height: 100vh;
   display: flex;
@@ -43,46 +39,101 @@ body {
   overflow-x: hidden;
 }
 
-/* Background decoration */
+/* Cartographic grid background */
 body::before {
   content: '';
   position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background:
-    radial-gradient(ellipse at 20% 30%, rgba(88,166,255,0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(46,160,67,0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.02) 0%, transparent 40%);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(26,37,64,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,37,64,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(26,37,64,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,37,64,0.02) 1px, transparent 1px);
+  background-size:
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Subtle radial overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(184,145,42,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(26,37,64,0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Back link */
+.back-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--navy);
+  border: 1px solid rgba(184,145,42,0.2);
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Noto Sans JP', sans-serif;
+  transition: all .15s;
+  box-shadow: 0 2px 8px rgba(26,37,64,0.15);
+}
+.back-link:hover {
+  background: #243054;
+  border-color: rgba(184,145,42,0.4);
+  box-shadow: 0 4px 16px rgba(26,37,64,0.2);
 }
 
 /* Logo area */
 .logo-area {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   position: relative;
   z-index: 1;
 }
-.logo-area img {
-  height: 60px;
-  width: auto;
-  object-fit: contain;
-  filter: invert(1);
+.logo-main {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+}
+.logo-dot {
+  color: var(--gold);
+}
+.logo-subtitle {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  margin-top: 4px;
 }
 
 /* Login card */
 .login-card {
   width: 100%;
   max-width: 420px;
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 36px 32px;
   position: relative;
   z-index: 1;
+  box-shadow: 0 4px 24px rgba(26,37,64,0.06), 0 1px 3px rgba(26,37,64,0.04);
 }
 
 /* Tabs */
@@ -98,18 +149,18 @@ body::before {
   text-align: center;
   font-size: 0.9em;
   font-weight: 600;
-  color: var(--text-sub);
+  color: var(--text-muted);
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: inherit;
+  font-family: 'Shippori Mincho B1', serif;
 }
 .auth-tab:hover { color: var(--text); }
 .auth-tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  color: var(--navy);
+  border-bottom-color: var(--gold);
 }
 
 /* Social login buttons */
@@ -128,29 +179,24 @@ body::before {
   padding: 12px 16px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: var(--bg-input);
+  background: var(--paper);
   color: var(--text);
   font-size: 0.9em;
-  font-weight: 600;
-  font-family: inherit;
+  font-weight: 500;
+  font-family: 'Noto Sans JP', sans-serif;
   cursor: pointer;
   transition: all 0.15s;
 }
 .social-btn:hover {
-  border-color: var(--text-sub);
-  background: rgba(255,255,255,0.03);
+  border-color: var(--text-muted);
+  background: #F0EDE6;
 }
 .social-btn svg, .social-btn img {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 }
-
-/* Google button specific */
 .social-btn.google:hover { border-color: #4285f4; }
-
-/* LINE button specific */
-.social-btn.line { }
 .social-btn.line:hover { border-color: #06C755; }
 
 /* Divider */
@@ -183,17 +229,18 @@ body::before {
 .form-input {
   width: 100%;
   padding: 11px 14px;
-  background: var(--bg-input);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text);
   font-size: 0.92em;
-  font-family: inherit;
+  font-family: 'Noto Sans JP', sans-serif;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 .form-input:focus {
-  border-color: var(--border-focus);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184,145,42,0.1);
 }
 .form-input::placeholder {
   color: var(--text-muted);
@@ -210,12 +257,13 @@ body::before {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--text-sub);
+  color: var(--text-muted);
   cursor: pointer;
-  font-size: 0.85em;
+  font-size: 0.82em;
   padding: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
 }
-.password-toggle:hover { color: var(--text); }
+.password-toggle:hover { color: var(--text-sub); }
 
 /* Form extras */
 .form-extras {
@@ -233,34 +281,45 @@ body::before {
   cursor: pointer;
 }
 .remember-me input[type="checkbox"] {
-  accent-color: var(--accent);
+  accent-color: var(--gold);
   width: 15px;
   height: 15px;
 }
 .forgot-link {
-  color: var(--accent);
+  color: var(--gold);
   text-decoration: none;
   font-weight: 500;
 }
-.forgot-link:hover { text-decoration: underline; }
+.forgot-link:hover { text-decoration: underline; color: var(--gold-hover); }
 
-/* Submit button */
+/* Submit button — Login (Primary: Navy bg + Gold text) */
 .submit-btn {
   width: 100%;
   padding: 13px 20px;
-  background: var(--accent);
-  color: #0d1117;
+  background: var(--navy);
+  color: var(--gold);
   border: none;
   border-radius: 10px;
   font-size: 0.95em;
   font-weight: 700;
-  font-family: inherit;
+  font-family: 'Noto Sans JP', sans-serif;
   cursor: pointer;
   transition: all 0.15s;
+  letter-spacing: 0.04em;
 }
 .submit-btn:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 4px 16px rgba(88,166,255,0.25);
+  background: #243054;
+  box-shadow: 0 4px 16px rgba(26,37,64,0.2);
+}
+
+/* Register button — Gold bg + Navy text */
+.submit-btn.register {
+  background: var(--gold);
+  color: var(--navy);
+}
+.submit-btn.register:hover {
+  background: var(--gold-hover);
+  box-shadow: 0 4px 16px rgba(184,145,42,0.25);
 }
 
 /* Error message */
@@ -268,7 +327,7 @@ body::before {
   display: none;
   padding: 10px 14px;
   background: var(--error-bg);
-  border: 1px solid rgba(248,81,73,0.3);
+  border: 1px solid rgba(192,57,43,0.2);
   border-radius: 8px;
   color: var(--error);
   font-size: 0.82em;
@@ -288,7 +347,7 @@ body::before {
   line-height: 1.6;
 }
 .terms a {
-  color: var(--accent);
+  color: var(--gold);
   text-decoration: none;
 }
 .terms a:hover { text-decoration: underline; }
@@ -308,15 +367,16 @@ body::before {
   cursor: pointer;
   transition: all 0.15s;
   text-align: center;
+  background: var(--paper);
 }
-.plan-option:hover { border-color: var(--text-sub); }
+.plan-option:hover { border-color: var(--text-muted); }
 .plan-option.selected {
-  border-color: var(--accent);
-  background: rgba(88,166,255,0.06);
+  border-color: var(--navy);
+  background: rgba(26,37,64,0.04);
 }
 .plan-option.premium.selected {
   border-color: var(--gold);
-  background: var(--gold-bg);
+  background: rgba(184,145,42,0.06);
 }
 .plan-option input[type="radio"] {
   position: absolute;
@@ -327,16 +387,16 @@ body::before {
   font-weight: 700;
   font-size: 0.9em;
   margin-bottom: 4px;
+  color: var(--navy);
 }
 .plan-option.premium .plan-name { color: var(--gold); }
 .plan-price {
-  font-family: 'Inter', sans-serif;
   font-size: 0.8em;
   color: var(--text-sub);
 }
 .plan-price strong {
   font-size: 1.3em;
-  color: var(--text);
+  color: var(--navy);
 }
 .plan-option.premium .plan-price strong { color: var(--gold); }
 .plan-badge {
@@ -344,7 +404,7 @@ body::before {
   top: -8px;
   right: -8px;
   background: var(--gold);
-  color: #0d1117;
+  color: #fff;
   font-size: 0.65em;
   font-weight: 700;
   padding: 2px 8px;
@@ -361,7 +421,7 @@ body::before {
   z-index: 1;
 }
 .login-footer a {
-  color: var(--accent);
+  color: var(--gold);
   text-decoration: none;
   font-weight: 600;
 }
@@ -376,12 +436,14 @@ body::before {
   z-index: 1;
 }
 .benefits-card {
-  background: var(--bg-card);
-  border: 1px solid var(--gold-border);
+  background: var(--card-bg);
+  border: 1px solid rgba(184,145,42,0.25);
   border-radius: 16px;
   padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(26,37,64,0.04);
 }
 .benefits-title {
+  font-family: 'Shippori Mincho B1', serif;
   font-size: 0.95em;
   font-weight: 700;
   color: var(--gold);
@@ -414,17 +476,19 @@ body::before {
   .login-card { padding: 28px 20px; }
   .plan-selector { grid-template-columns: 1fr; }
   .form-group.name-row { grid-template-columns: 1fr; }
+  .logo-main { font-size: 34px; }
 }
 </style>
 </head>
 <body>
 
 <!-- Back to Portal -->
-<a href="index.html" style="position:fixed;top:16px;left:16px;z-index:999;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;background:#1A2540;border:1px solid rgba(184,145,42,0.2);color:#D4A843;text-decoration:none;font-size:13px;font-weight:500;font-family:'Noto Sans JP',sans-serif;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.15)">← ポータルに戻る</a>
+<a class="back-link" href="index.html">&larr; ポータルに戻る</a>
 
 <!-- Logo -->
 <div class="logo-area">
-  <div style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:0.04em">Atlas<span style="color:#D4A843">.</span></div>
+  <div class="logo-main">Atlas<span class="logo-dot">.</span></div>
+  <div class="logo-subtitle">by U&I CO., LTD.</div>
 </div>
 
 <!-- Login Card -->
@@ -552,7 +616,7 @@ body::before {
     </div>
 
     <!-- Submit -->
-    <button class="submit-btn" id="register-btn" onclick="handleRegister()">無料で登録する</button>
+    <button class="submit-btn register" id="register-btn" onclick="handleRegister()">無料で登録する</button>
   </div>
 
 </div>
