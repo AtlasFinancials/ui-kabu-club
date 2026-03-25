@@ -152,17 +152,7 @@ body {
 }
 [data-theme="dark"] .nav-logo-text { color: #fff; }
 [data-theme="light"] .nav-logo-text { color: #1A2540; }
-.nav-logo-dot {
-  color: #B8912A;
-}
-.nav-logo-sub {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  color: var(--text-muted);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  margin-left: 8px;
-}
+.nav-logo-dot { color: #B8912A; }
 
 .nav-actions {
   display: flex; align-items: center; gap: 8px;
@@ -191,7 +181,7 @@ body {
   margin-top: 96px;
   background: var(--bg-hero);
   border-bottom: 1px solid rgba(184,145,42,0.12);
-  padding: 44px 20px 64px;
+  padding: 44px 20px 48px;
   color: var(--text-on-dark);
   position: relative;
   overflow: hidden;
@@ -208,61 +198,8 @@ body {
 
 .hero-inner { max-width: var(--max-w); margin: 0 auto; position: relative; z-index: 1; }
 
-.hero-top {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.hero-greeting { font-size: 18px; font-weight: 700; opacity: .8; }
-
-.hero-top-row {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 20px; margin-bottom: 20px;
-}
-
-.hero-events {
-  display: flex; flex-direction: column; gap: 6px;
-  flex-shrink: 0;
-}
-
-.hero-event-item {
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(184,145,42,0.15);
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 12px; font-weight: 500;
-  color: var(--text-on-dark);
-  white-space: nowrap;
-}
-
-.hero-event-time {
-  font-family: 'Inter', var(--font-sans);
-  font-weight: 700; color: var(--accent);
-  font-size: 11px;
-}
-
-.hero-event-badge {
-  font-size: 10px; font-weight: 700;
-  padding: 2px 7px; border-radius: 4px;
-}
-
-.hero-event-badge.high {
-  background: rgba(139,32,32,.2); color: #c0392b;
-}
-
-.hero-event-badge.medium {
-  background: rgba(184,145,42,.2); color: #D4A843;
-}
-
-@media (max-width: 767px) {
-  .hero-top-row { flex-direction: column; }
-  .hero-events { flex-direction: row; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-  .hero-events::-webkit-scrollbar { display: none; }
-}
-
 .hero-title {
-  font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 24px;
+  font-size: 26px; font-weight: 700; letter-spacing: -.02em;
 }
 
 .hero-sub-message {
@@ -274,393 +211,6 @@ body {
   color: #D4A843;
   -webkit-text-fill-color: #D4A843;
 }
-
-[data-theme="dark"] .hero-logo-white {
-  height: 40px; width: auto; opacity: .7;
-}
-[data-theme="light"] .hero-logo-white {
-  height: 40px; width: auto; opacity: .8;
-}
-
-/* Market Header Row */
-.market-header-row {
-  display: flex; align-items: baseline; gap: 14px;
-  margin: 28px 0 16px;
-}
-.market-header-title {
-  font-family: var(--font-heading);
-  font-size: 1.5em; font-weight: 800; letter-spacing: -.3px;
-}
-.market-header-date {
-  font-size: 18px; font-weight: 700; color: #ffffff;
-  white-space: nowrap;
-}
-
-/* Market Cards */
-.market-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-}
-
-.market-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md); padding: 16px;
-  transition: transform var(--transition), background var(--transition), border-color var(--transition);
-}
-.market-card:hover {
-  transform: translateY(-2px);
-  background: var(--bg-card-hover);
-  border-color: rgba(184,145,42,0.3);
-}
-
-.market-card-label {
-  font-size: 14px; opacity: .8; margin-bottom: 6px; font-weight: 700;
-  letter-spacing: .01em;
-}
-
-.market-card-value {
-  font-size: 24px; font-weight: 800; letter-spacing: -.03em;
-  font-family: 'Playfair Display', 'Inter', var(--font-sans);
-}
-
-.market-card-change { font-size: 13px; font-weight: 600; margin-top: 4px; }
-/* Market Tabs */
-.market-tabs {
-  display: flex; gap: 6px; margin-bottom: 14px;
-  overflow-x: auto; -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.market-tabs::-webkit-scrollbar { display: none; }
-
-.market-tab {
-  padding: 7px 16px; border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text-secondary);
-  font-size: 13px; font-weight: 600;
-  cursor: pointer; white-space: nowrap;
-  transition: all var(--transition);
-  font-family: var(--font-sans);
-}
-.market-tab:hover {
-  background: var(--bg-card-hover);
-  color: var(--text-primary);
-  border-color: rgba(184,145,42,0.3);
-}
-.market-tab.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #0F1829;
-}
-
-.market-tab-content { display: none; }
-.market-tab-content.active { display: block; }
-
-/* ==========================================
-   Crash Risk Meter
-   ========================================== */
-.risk-meter-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  margin-bottom: 16px;
-}
-
-.risk-meter-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 18px;
-}
-
-.risk-meter-title {
-  font-size: 15px; font-weight: 700;
-  display: flex; align-items: center; gap: 8px;
-}
-
-.risk-meter-score {
-  font-size: 28px; font-weight: 800;
-  font-family: 'Playfair Display', 'Inter', var(--font-sans);
-  letter-spacing: -.03em;
-}
-
-.risk-meter-label {
-  font-size: 13px; font-weight: 700;
-  padding: 3px 12px; border-radius: 8px;
-}
-
-/* Gauge */
-.risk-gauge {
-  position: relative;
-  width: 100%; height: 14px;
-  background: var(--border);
-  border-radius: 7px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.risk-gauge-bg {
-  position: absolute; inset: 0;
-  border-radius: 7px;
-  background: linear-gradient(90deg,
-    #3fb950 0%,
-    #3fb950 20%,
-    #d29922 40%,
-    #f5a623 55%,
-    #f85149 75%,
-    #da3633 100%
-  );
-  opacity: .25;
-}
-
-.risk-gauge-fill {
-  position: absolute; top: 0; left: 0; bottom: 0;
-  border-radius: 7px;
-  background: linear-gradient(90deg,
-    #3fb950 0%,
-    #d29922 40%,
-    #f5a623 55%,
-    #f85149 75%,
-    #da3633 100%
-  );
-  width: 0%;
-  transition: width 1.8s cubic-bezier(.22,.61,.36,1);
-}
-
-.risk-gauge-needle {
-  position: absolute; top: -4px;
-  width: 4px; height: 22px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255,255,255,.5);
-  left: 0%;
-  transition: left 1.8s cubic-bezier(.22,.61,.36,1);
-  z-index: 2;
-}
-
-.risk-gauge-labels {
-  display: flex; justify-content: space-between;
-  font-size: 11px; color: var(--text-muted); font-weight: 500;
-}
-
-/* Breakdown mini bars */
-.risk-breakdown {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-
-.risk-factor {
-  display: flex; flex-direction: column; gap: 4px;
-}
-
-.risk-factor-header {
-  display: flex; justify-content: space-between; align-items: center;
-}
-
-.risk-factor-name {
-  font-size: 11px; color: var(--text-secondary); font-weight: 600;
-}
-
-.risk-factor-value {
-  font-size: 11px; font-weight: 700;
-  font-family: 'Inter', var(--font-sans);
-}
-
-.risk-factor-bar {
-  height: 4px; background: var(--border); border-radius: 2px;
-  overflow: hidden;
-}
-
-.risk-factor-bar-fill {
-  height: 100%; border-radius: 2px;
-  width: 0%;
-  transition: width 1.5s cubic-bezier(.22,.61,.36,1);
-}
-
-/* Pulse glow animation for high risk */
-@keyframes riskPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(139,32,32,.0); }
-  50% { box-shadow: 0 0 16px 4px rgba(139,32,32,.2); }
-}
-
-.risk-meter-container.risk-high {
-  animation: riskPulse 3s ease-in-out infinite;
-  border-color: rgba(139,32,32,.3);
-}
-
-.risk-meter-container.risk-elevated {
-  border-color: rgba(184,145,42,.25);
-}
-
-/* ==========================================
-   News Headlines
-   ========================================== */
-.news-headlines {
-  margin-top: 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.news-headlines-header {
-  display: flex; align-items: center; gap: 6px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  font-size: 12px; font-weight: 700; color: var(--text-secondary);
-  letter-spacing: .02em;
-}
-
-.news-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 16px;
-  text-decoration: none; color: inherit;
-  border-bottom: 1px solid var(--border);
-  transition: background var(--transition);
-}
-
-.news-item:last-child { border-bottom: none; }
-
-.news-item:hover {
-  background: var(--bg-card-hover);
-}
-
-.news-item-time {
-  font-size: 11px; color: var(--text-muted); font-weight: 500;
-  white-space: nowrap; min-width: 42px;
-  font-family: 'Inter', var(--font-sans);
-}
-
-.news-item-title {
-  font-size: 13px; font-weight: 500; color: var(--text-primary);
-  line-height: 1.5;
-  display: -webkit-box; -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical; overflow: hidden;
-  flex: 1;
-  transition: color var(--transition);
-}
-
-.news-item:hover .news-item-title {
-  color: var(--accent);
-}
-
-.news-item-source {
-  font-size: 11px; color: var(--text-muted); font-weight: 500;
-  white-space: nowrap;
-}
-
-.news-item-arrow {
-  font-size: 12px; color: var(--text-muted);
-  transition: transform var(--transition), color var(--transition);
-}
-
-.news-item:hover .news-item-arrow {
-  transform: translateX(2px);
-  color: var(--accent);
-}
-
-/* ==========================================
-   TradingView Chart Popup
-   ========================================== */
-.tv-popup {
-  position: fixed;
-  z-index: 9999;
-  width: 480px;
-  height: 320px;
-  background: #1A2540;
-  border: 1px solid rgba(184,145,42,0.2);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.3);
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-.tv-popup.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.tv-popup iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-.tv-popup-loading {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted); font-size: 13px; font-weight: 500;
-  gap: 8px;
-}
-
-@keyframes tvSpin {
-  to { transform: rotate(360deg); }
-}
-
-.tv-popup-loading::before {
-  content: '';
-  width: 16px; height: 16px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: tvSpin .8s linear infinite;
-}
-
-@media (max-width: 767px) {
-  .tv-popup { width: 320px; height: 240px; }
-}
-
-.market-card {
-  position: relative;
-  cursor: pointer;
-}
-
-.market-card-change.positive { color: var(--accent-green); }
-.market-card-change.negative { color: var(--accent-red); }
-.market-card-change.neutral { color: var(--text-muted); font-size: 12px; }
-.market-card-change.fear-greed-label {
-  color: #D4A843; font-size: 12px; font-weight: 700;
-  background: rgba(184,145,42,.15); display: inline-block;
-  padding: 1px 8px; border-radius: 8px;
-}
-
-/* ===== Light theme — contrast fixes ===== */
-[data-theme="light"] .market-card {
-  color: var(--text-primary);
-}
-[data-theme="light"] .market-card-label {
-  color: var(--text-secondary);
-  opacity: 1;
-}
-[data-theme="light"] .market-card-value {
-  color: var(--text-primary);
-}
-[data-theme="light"] .market-card-change.positive { color: var(--accent-green); }
-[data-theme="light"] .market-card-change.negative { color: var(--accent-red); }
-[data-theme="light"] .market-card-change.fear-greed-label { color: var(--accent-amber); background: var(--accent-amber-light); }
-[data-theme="light"] .market-card:hover { border-color: rgba(184,145,42,0.3); }
-[data-theme="light"] .hero-event-item { color: var(--text-on-dark); }
-[data-theme="light"] .hero-event-badge.high { color: var(--accent-red); }
-[data-theme="light"] .hero-event-badge.medium { color: var(--accent-amber); }
-[data-theme="light"] .risk-meter-container { color: var(--text-primary); }
-[data-theme="light"] .risk-factor-name { color: var(--text-secondary); }
-[data-theme="light"] .risk-factor-value { color: var(--text-primary); }
-[data-theme="light"] .news-item-title { color: var(--text-primary); }
-[data-theme="light"] .news-item:hover .news-item-title { color: var(--accent); }
-[data-theme="light"] .content-card:hover,
-[data-theme="light"] .learn-card:hover,
-[data-theme="light"] .panel-card:hover { border-color: rgba(184,145,42,0.3); }
-[data-theme="light"] .lock-overlay { background: rgba(245,242,236,.75); }
 
 /* ==========================================
    Main Content
@@ -685,107 +235,6 @@ body {
   font-weight: 600; transition: opacity var(--transition);
 }
 .section-more:hover { opacity: .7; }
-
-/* ==========================================
-   Filter Tabs
-   ========================================== */
-.filter-tabs {
-  display: flex; gap: 8px; margin-bottom: 20px;
-  overflow-x: auto; -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; padding-bottom: 4px;
-}
-.filter-tabs::-webkit-scrollbar { display: none; }
-
-.filter-tab {
-  padding: 8px 18px; border-radius: 100px;
-  border: 1.5px solid var(--border); background: var(--bg-card);
-  color: var(--text-secondary); font-size: 13px; font-weight: 600;
-  cursor: pointer; white-space: nowrap;
-  transition: all var(--transition);
-}
-/* ==========================================
-   Main Panels (4 large navigation panels)
-   ========================================== */
-.panels-section {
-  max-width: var(--max-w); margin: 0 auto; padding: 28px 20px 0;
-  position: relative; z-index: 10;
-}
-
-.panels-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.panel-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px 24px;
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-  transition: all var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.panel-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,.15);
-  transform: translateY(-2px);
-  background: var(--bg-card-hover);
-  border-color: var(--accent);
-}
-
-.panel-card.morning:hover { border-color: var(--gold); }
-.panel-card.earnings:hover { border-color: var(--gold-lt); }
-.panel-card.learn:hover { border-color: var(--gold); }
-.panel-card.market:hover { border-color: var(--gold); }
-
-.panel-icon {
-  width: 52px; height: 52px;
-  border-radius: var(--radius-md);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px;
-}
-
-.panel-icon.morning-bg { background: var(--accent-blue-light); }
-.panel-icon.earnings-bg { background: var(--accent-green-light); }
-.panel-icon.learn-bg { background: var(--accent-purple-light); }
-.panel-icon.special-bg { background: var(--accent-purple-light); }
-.panel-card.special:hover { border-color: var(--gold); }
-.panel-card.special .panel-badge { color: var(--text-secondary); }
-.panel-icon.market-bg { background: var(--accent-amber-light); }
-
-.panel-title {
-  font-family: var(--font-heading);
-  font-size: 22px; font-weight: 800; letter-spacing: -.02em;
-}
-
-.panel-desc {
-  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
-}
-
-.panel-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; color: var(--text-muted);
-  margin-top: auto;
-}
-
-.panel-badge .new-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--accent); display: inline-block;
-}
-
-@media (min-width: 768px) {
-  .panels-section { padding: 36px 40px 0; }
-  .panels-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .panel-card { padding: 32px 24px; }
-}
 
 /* ==========================================
    Content Cards
@@ -858,6 +307,56 @@ a.content-card { text-decoration: none; color: inherit; }
 .earnings-quarter { font-size: 12px; color: var(--text-muted); font-weight: 500; }
 
 /* ==========================================
+   Explore Grid (Navigation Cards)
+   ========================================== */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.explore-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.explore-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(184,145,42,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,145,42,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.explore-card:hover::before { opacity: 1; }
+.explore-card:hover {
+  border-color: rgba(184,145,42,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(184,145,42,0.06);
+}
+.explore-icon { font-size: 28px; }
+.explore-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.explore-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.explore-arrow { font-size: 12px; color: var(--gold); margin-top: auto; }
+
+/* ==========================================
    投資の教科書
    ========================================== */
 .learn-grid {
@@ -893,6 +392,15 @@ a.content-card { text-decoration: none; color: inherit; }
 .learn-card-count {
   display: inline-block; margin-top: 10px;
   font-size: 12px; color: var(--text-muted); font-weight: 500;
+}
+
+/* Glossary link card in learn grid */
+.learn-card.glossary-card {
+  border: 1px dashed var(--border);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(184,145,42,.04) 100%);
+}
+.learn-card.glossary-card:hover {
+  border-color: var(--accent); border-style: solid;
 }
 
 /* ==========================================
@@ -941,7 +449,6 @@ a.content-card { text-decoration: none; color: inherit; }
 /* ==========================================
    Auth State & Content Gating
    ========================================== */
-/* Auth nav items */
 .nav-auth { display: flex; align-items: center; gap: 10px; }
 .auth-login-btn {
   padding: 7px 18px; border-radius: 8px; border: 1px solid var(--accent);
@@ -1062,188 +569,11 @@ a.content-card { text-decoration: none; color: inherit; }
 .premium-section { display: none; }
 .premium-section.visible { display: block; }
 
-/* Video grid */
-.video-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
-}
-.video-card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
-  overflow: hidden; transition: border-color .2s, transform .2s; cursor: pointer;
-}
-.video-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-.video-thumb {
-  width: 100%; aspect-ratio: 16/9; background: var(--bg-card-hover);
-  display: flex; align-items: center; justify-content: center; position: relative;
-}
-.video-thumb-icon { font-size: 36px; opacity: .6; }
-.video-duration {
-  position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,.75);
-  color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 4px;
-  font-family: 'Inter', sans-serif;
-}
-.video-info { padding: 14px; }
-.video-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; line-height: 1.4; }
-.video-meta { font-size: 12px; color: var(--text-secondary); }
-
-/* Cross-analysis card */
-.cross-report-card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
-  padding: 24px; display: flex; gap: 20px; align-items: center;
-  transition: border-color .2s; cursor: pointer;
-}
-.cross-report-card:hover { border-color: var(--accent); }
-.cross-report-icon { font-size: 42px; flex-shrink: 0; }
-.cross-report-info { flex: 1; }
-.cross-report-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-.cross-report-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-.cross-report-badge {
-  display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600;
-  padding: 3px 10px; border-radius: 6px; background: rgba(184,145,42,.12); color: var(--accent);
-}
-
-/* Guest preview card (shows what they're missing) */
-.preview-teaser {
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(184,145,42,.04) 100%);
-  border: 1px dashed var(--border); border-radius: var(--radius-md);
-  padding: 24px; text-align: center; margin-top: 16px;
-}
-.preview-teaser-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-.preview-teaser-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
-.preview-teaser-items {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px;
-}
-.preview-teaser-item {
-  font-size: 12px; color: var(--text-secondary); background: var(--bg-card-hover);
-  padding: 6px 12px; border-radius: 6px;
-}
-
-@media (max-width: 768px) {
-  .video-grid { grid-template-columns: 1fr; }
-  .cross-report-card { flex-direction: column; text-align: center; }
-  .upgrade-banner { flex-direction: column; text-align: center; }
-  .auth-demo { bottom: 76px; right: 8px; left: 8px; }
-  .auth-demo-btns { justify-content: center; }
-  .bottom-nav { z-index: 100; }
-}
-
-/* ==========================================
-   Earnings Calendar
-   ========================================== */
-.earnings-cal {
-  max-width: var(--max-w); margin: 0 auto; padding: 28px 20px 0;
-}
-.earnings-cal-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 16px;
-}
-.earnings-cal-title {
-  font-family: var(--font-heading);
-  font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px;
-}
-.earnings-cal-week {
-  font-size: 13px; color: var(--text-secondary); font-weight: 600;
-}
-.earnings-cal-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-}
-.earnings-cal-day {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius-md); padding: 14px 12px;
-  min-height: 120px;
-  transition: all var(--transition);
-}
-.earnings-cal-day.today {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 2px 12px rgba(184,145,42,.15);
-}
-.earnings-cal-day-header {
-  font-size: 12px; font-weight: 700; color: var(--text-secondary);
-  margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;
-}
-.earnings-cal-day-header .day-date {
-  font-size: 11px; color: var(--text-muted); font-weight: 500;
-}
-.earnings-cal-day.today .earnings-cal-day-header {
-  color: var(--accent);
-}
-.earnings-cal-tickers {
-  display: flex; flex-wrap: wrap; gap: 6px;
-}
-.earnings-cal-ticker {
-  display: flex; align-items: center; gap: 5px;
-  padding: 4px 8px; border-radius: 6px;
-  background: var(--bg-card-hover); border: 1px solid transparent;
-  font-size: 11px; font-weight: 700; color: var(--text-primary);
-  font-family: 'Inter', var(--font-sans);
-  transition: all .15s; cursor: default;
-  text-decoration: none;
-}
-.earnings-cal-ticker:hover {
-  border-color: var(--accent); background: var(--accent-light);
-}
-.earnings-cal-ticker img {
-  width: 16px; height: 16px; object-fit: contain; border-radius: 3px;
-}
-.earnings-cal-ticker .timing-badge {
-  font-size: 9px; font-weight: 600; color: var(--text-muted);
-  margin-left: 2px;
-}
-.earnings-cal-empty {
-  font-size: 12px; color: var(--text-muted); font-style: italic;
-}
-
-
-/* ==========================================
-   Sector Heatmap
-   ========================================== */
-.heatmap-section {
-  max-width: var(--max-w); margin: 0 auto; padding: 24px 20px 0;
-}
-.heatmap-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
-}
-.heatmap-title {
-  font-family: var(--font-heading);
-  font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px;
-}
-.heatmap-date {
-  font-size: 12px; color: var(--text-muted); font-weight: 500;
-}
-.heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 8px;
-}
-.heatmap-cell {
-  border-radius: var(--radius-sm); padding: 14px 12px;
-  text-align: center; transition: transform .15s;
-  cursor: default; position: relative; overflow: hidden;
-}
-.heatmap-cell:hover { transform: scale(1.03); }
-.heatmap-cell-name {
-  font-size: 12px; font-weight: 700; margin-bottom: 2px;
-  color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.4);
-}
-.heatmap-cell-change {
-  font-size: 18px; font-weight: 800; font-family: 'Inter', var(--font-sans);
-  color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.4);
-}
-.heatmap-cell-etf {
-  font-size: 10px; color: rgba(255,255,255,.7); margin-top: 2px;
-  font-family: 'Inter', var(--font-sans);
-}
-
-/* Glossary link card in learn grid */
-.learn-card.glossary-card {
-  border: 1px dashed var(--border);
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(184,145,42,.04) 100%);
-}
-.learn-card.glossary-card:hover {
-  border-color: var(--accent); border-style: solid;
-}
+/* ===== Light theme — contrast fixes ===== */
+[data-theme="light"] .content-card:hover,
+[data-theme="light"] .learn-card:hover,
+[data-theme="light"] .explore-card:hover { border-color: rgba(184,145,42,0.3); }
+[data-theme="light"] .lock-overlay { background: rgba(245,242,236,.75); }
 
 /* ==========================================
    Fade-in
@@ -1258,22 +588,15 @@ a.content-card { text-decoration: none; color: inherit; }
    Responsive
    ========================================== */
 @media (min-width: 768px) {
-  .hero { padding: 52px 40px 72px; }
+  .hero { padding: 52px 40px 56px; }
   .hero-title { font-size: 32px; }
   .main { padding: 36px 40px; }
   .content-grid { grid-template-columns: repeat(2, 1fr); }
   .bottom-nav { display: none; }
   body { padding-bottom: 0; }
-  .market-cards { grid-template-columns: repeat(4, 1fr); }
-  .earnings-cal { padding: 36px 40px 0; }
-  .heatmap-section { padding: 28px 40px 0; }
 }
 @media (max-width: 767px) {
-  .earnings-cal-grid { grid-template-columns: 1fr; gap: 8px; }
-  .earnings-cal-day { min-height: auto; padding: 12px; }
-  .heatmap-grid { grid-template-columns: repeat(3, 1fr); }
-  .heatmap-cell { padding: 10px 8px; }
-  .heatmap-cell-change { font-size: 15px; }
+  .explore-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
   .hero-title { font-size: 36px; }
@@ -1284,16 +607,15 @@ a.content-card { text-decoration: none; color: inherit; }
    ========================================== */
 @media (max-width: 480px) {
   body { padding-bottom: 70px; }
-  .hero { padding: 32px 12px 48px; }
+  .hero { padding: 32px 12px 40px; }
   .hero-title { font-size: 22px; }
-  .market-cards { grid-template-columns: repeat(2, 1fr); }
-  .panels-grid { grid-template-columns: 1fr !important; }
   .content-grid { grid-template-columns: 1fr !important; }
   .learn-grid { grid-template-columns: 1fr !important; }
-  .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
-  .market-header-row { flex-direction: column; gap: 4px; }
+  .explore-grid { grid-template-columns: 1fr !important; }
   .section-title { font-size: 16px; }
-  .video-grid { grid-template-columns: 1fr; }
+  .auth-demo { bottom: 76px; right: 8px; left: 8px; }
+  .auth-demo-btns { justify-content: center; }
+  .upgrade-banner { flex-direction: column; text-align: center; }
 }
 
 /* ==========================================
@@ -1301,7 +623,7 @@ a.content-card { text-decoration: none; color: inherit; }
    ========================================== */
 @media print {
   html { --bg-primary:#fff; --bg-card:#fff; --text-primary:#000; --border:#ccc; }
-  .top-nav, .bottom-nav, .theme-toggle, .auth-demo, .tv-popup, .toc-nav { display:none!important; }
+  .top-nav, .bottom-nav, .theme-toggle, .auth-demo { display:none!important; }
   body { padding: 0; }
 }
 </style>
@@ -1334,7 +656,7 @@ a.content-card { text-decoration: none; color: inherit; }
 <nav class="top-nav" style="top:36px">
   <div class="top-nav-inner">
     <a href="index.html" class="logo">
-      <span class="nav-logo-text">Atlas<span class="nav-logo-dot">.</span></span><span class="nav-logo-sub">by U&I CO., LTD.</span>
+      <span class="nav-logo-text">Atlas<span class="nav-logo-dot">.</span></span>
     </a>
     <div class="nav-actions">
       <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">☀️</button>
@@ -1365,566 +687,16 @@ a.content-card { text-decoration: none; color: inherit; }
 <!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-top-row">
-      <div>
-        <h1 class="hero-title" id="heroGreeting"></h1>
-      </div>
-      <div class="hero-events">
-        <div class="hero-event-item">
-          <span class="hero-event-badge high">重要</span>
-          <span class="hero-event-time">21:30</span>
-          <span>🇺🇸 PPI（生産者物価指数）</span>
-        </div>
-        <div class="hero-event-item">
-          <span class="hero-event-badge high">重要</span>
-          <span class="hero-event-time">23:00</span>
-          <span>🇺🇸 ミシガン大消費者信頼感指数</span>
-        </div>
-        <div class="hero-event-item">
-          <span class="hero-event-badge medium">注目</span>
-          <span class="hero-event-time">08:50</span>
-          <span>🇯🇵 日銀短観（3月調査）</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="market-header-row">
-      <h2 class="market-header-title">本日の市場概況</h2>
-      <span class="market-header-date" id="heroDate"></span>
-    </div>
-
-    <!-- Market Tabs -->
-    <div class="market-tabs">
-      <button class="market-tab active" data-target="tab-index">主要指数</button>
-      <button class="market-tab" data-target="tab-sentiment">センチメント</button>
-      <button class="market-tab" data-target="tab-rates">金利・為替</button>
-      <button class="market-tab" data-target="tab-commodity">コモディティ</button>
-      <button class="market-tab" data-target="tab-stocks">主要銘柄</button>
-    </div>
-
-    <!-- Tab: 主要指数 -->
-    <div class="market-tab-content active" id="tab-index">
-      <div class="market-cards">
-        <div class="market-card" data-tv="SP:SPX">
-          <div class="market-card-label">S&P 500</div>
-          <div class="market-card-value">5,842</div>
-          <div class="market-card-change positive">▲ +1.12%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:NDX">
-          <div class="market-card-label">NASDAQ</div>
-          <div class="market-card-value">18,456</div>
-          <div class="market-card-change positive">▲ +1.38%</div>
-        </div>
-        <div class="market-card" data-tv="DJ:DJI">
-          <div class="market-card-label">DJI（ダウ）</div>
-          <div class="market-card-value">43,215</div>
-          <div class="market-card-change negative">▼ -0.24%</div>
-        </div>
-        <div class="market-card" data-tv="TVC:RUT">
-          <div class="market-card-label">Russell 2000</div>
-          <div class="market-card-value">2,087</div>
-          <div class="market-card-change positive">▲ +0.68%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:SOX">
-          <div class="market-card-label">SOX（半導体）</div>
-          <div class="market-card-value">4,823</div>
-          <div class="market-card-change positive">▲ +2.14%</div>
-        </div>
-        <div class="market-card" data-tv="DJ:DJT">
-          <div class="market-card-label">DJT（輸送株）</div>
-          <div class="market-card-value">16,142</div>
-          <div class="market-card-change negative">▼ -0.31%</div>
-        </div>
-        <div class="market-card" data-tv="TVC:NI225">
-          <div class="market-card-label">日経平均</div>
-          <div class="market-card-value">38,756</div>
-          <div class="market-card-change positive">▲ +0.52%</div>
-        </div>
-        <div class="market-card" data-tv="TSE:TOPIX">
-          <div class="market-card-label">TOPIX</div>
-          <div class="market-card-value">2,714</div>
-          <div class="market-card-change positive">▲ +0.38%</div>
-        </div>
-      </div>
-
-      <div class="news-headlines">
-        <div class="news-headlines-header">📰 指数関連ニュース</div>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:32</span>
-          <span class="news-item-title">S&P500が年初来高値を更新、AI関連株の上昇が牽引</span>
-          <span class="news-item-source">Reuters</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:15</span>
-          <span class="news-item-title">ラッセル2000が3日続伸、中小型株への資金流入が加速</span>
-          <span class="news-item-source">Bloomberg</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">05:48</span>
-          <span class="news-item-title">SOX指数が2%超上昇、NVIDIA決算を前にAI半導体に期待感</span>
-          <span class="news-item-source">CNBC</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">05:20</span>
-          <span class="news-item-title">日経平均は小幅続伸、半導体関連株が下支え</span>
-          <span class="news-item-source">日経新聞</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:55</span>
-          <span class="news-item-title">ダウ輸送株平均が軟調、景気減速への警戒感くすぶる</span>
-          <span class="news-item-source">MarketWatch</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Tab: センチメント・金利・為替 -->
-    <div class="market-tab-content" id="tab-sentiment">
-
-      <!-- Crash Risk Meter -->
-      <div class="risk-meter-container" id="riskMeter">
-        <div class="risk-meter-header">
-          <div class="risk-meter-title">⚠️ 市場暴落リスクメーター</div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="risk-meter-score" id="riskScore">--</span>
-            <span class="risk-meter-label" id="riskLabel">計算中...</span>
-          </div>
-        </div>
-        <div class="risk-gauge">
-          <div class="risk-gauge-bg"></div>
-          <div class="risk-gauge-fill" id="riskGaugeFill"></div>
-          <div class="risk-gauge-needle" id="riskNeedle"></div>
-        </div>
-        <div class="risk-gauge-labels">
-          <span>低リスク</span>
-          <span>やや警戒</span>
-          <span>警戒</span>
-          <span>危険</span>
-          <span>暴落警報</span>
-        </div>
-        <div class="risk-breakdown" id="riskBreakdown"></div>
-      </div>
-
-      <div class="market-cards">
-        <div class="market-card" data-tv="CBOE:VIX">
-          <div class="market-card-label">VIX</div>
-          <div class="market-card-value">18.32</div>
-          <div class="market-card-change positive">▼ -1.45</div>
-        </div>
-        <div class="market-card" data-tv="CBOE:SKEW">
-          <div class="market-card-label">SKEW</div>
-          <div class="market-card-value">142.6</div>
-          <div class="market-card-change negative">▲ +1.82</div>
-        </div>
-        <div class="market-card" data-tv="TVC:MOVE">
-          <div class="market-card-label">MOVE</div>
-          <div class="market-card-value">98.4</div>
-          <div class="market-card-change negative">▲ +2.15</div>
-        </div>
-        <div class="market-card">
-          <div class="market-card-label">Fear & Greed</div>
-          <div class="market-card-value">62</div>
-          <div class="market-card-change fear-greed-label">Greed</div>
-        </div>
-        <div class="market-card">
-          <div class="market-card-label">Put/Call Ratio</div>
-          <div class="market-card-value">0.82</div>
-          <div class="market-card-change neutral">— 中立</div>
-        </div>
-        <div class="market-card" data-tv="FRED:BAMLH0A0HYM2">
-          <div class="market-card-label">HY スプレッド</div>
-          <div class="market-card-value">3.24<span style="font-size:14px">%</span></div>
-          <div class="market-card-change positive">▼ -0.05</div>
-        </div>
-      </div>
-
-      <div class="news-headlines">
-        <div class="news-headlines-header">📰 センチメント関連ニュース</div>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:10</span>
-          <span class="news-item-title">VIXが18台に低下、市場のリスク選好姿勢が鮮明に</span>
-          <span class="news-item-source">Bloomberg</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:50</span>
-          <span class="news-item-title">ハイイールド債スプレッドが縮小、クレジット市場は楽観維持</span>
-          <span class="news-item-source">FT</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:22</span>
-          <span class="news-item-title">Fear & Greedが62「Greed」圏、過度な楽観には注意との見方も</span>
-          <span class="news-item-source">CNN</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">03:45</span>
-          <span class="news-item-title">SKEWが142台に上昇、テールリスクへのヘッジ需要が増加</span>
-          <span class="news-item-source">MarketWatch</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">03:10</span>
-          <span class="news-item-title">Put/Call Ratio 0.82で中立圏、方向感の乏しい展開が続く</span>
-          <span class="news-item-source">CBOE</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Tab: 金利・為替 -->
-    <div class="market-tab-content" id="tab-rates">
-      <div class="market-cards">
-        <div class="market-card" data-tv="TVC:US02Y">
-          <div class="market-card-label">米2年金利</div>
-          <div class="market-card-value">3.96<span style="font-size:14px">%</span></div>
-          <div class="market-card-change positive">▼ -0.04</div>
-        </div>
-        <div class="market-card" data-tv="TVC:US10Y">
-          <div class="market-card-label">米10年金利</div>
-          <div class="market-card-value">4.28<span style="font-size:14px">%</span></div>
-          <div class="market-card-change negative">▲ +0.03</div>
-        </div>
-        <div class="market-card" data-tv="TVC:JP10Y">
-          <div class="market-card-label">日本10年金利</div>
-          <div class="market-card-value">1.52<span style="font-size:14px">%</span></div>
-          <div class="market-card-change negative">▲ +0.02</div>
-        </div>
-        <div class="market-card" data-tv="TVC:DXY">
-          <div class="market-card-label">DXY（ドル指数）</div>
-          <div class="market-card-value">103.8</div>
-          <div class="market-card-change negative">▲ +0.22%</div>
-        </div>
-        <div class="market-card" data-tv="FX:USDJPY">
-          <div class="market-card-label">USD/JPY</div>
-          <div class="market-card-value">148.6</div>
-          <div class="market-card-change positive">▼ -0.45</div>
-        </div>
-        <div class="market-card" data-tv="FX:EURUSD">
-          <div class="market-card-label">EUR/USD</div>
-          <div class="market-card-value">1.0912</div>
-          <div class="market-card-change positive">▲ +0.18%</div>
-        </div>
-      </div>
-
-      <div class="news-headlines">
-        <div class="news-headlines-header">📰 金利・為替関連ニュース</div>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:45</span>
-          <span class="news-item-title">CPI鈍化でFRB6月利下げ確率が72%に上昇、CME FedWatch</span>
-          <span class="news-item-source">Reuters</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">05:30</span>
-          <span class="news-item-title">日銀追加利上げ観測で日本10年債利回りが1.5%台に、円買い圧力も</span>
-          <span class="news-item-source">日経新聞</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:55</span>
-          <span class="news-item-title">米2年債利回りが4%割れ、短期金利の低下基調が鮮明に</span>
-          <span class="news-item-source">Bloomberg</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:15</span>
-          <span class="news-item-title">ドル指数が103台で膠着、ECB利下げ観測とFRBの温度差が綱引き</span>
-          <span class="news-item-source">CNBC</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">03:30</span>
-          <span class="news-item-title">ドル円148円台に下落、日米金利差縮小で円高方向に振れる</span>
-          <span class="news-item-source">FT</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Tab: コモディティ -->
-    <div class="market-tab-content" id="tab-commodity">
-      <div class="market-cards">
-        <div class="market-card" data-tv="TVC:GOLD">
-          <div class="market-card-label">Gold（金）</div>
-          <div class="market-card-value">2,980</div>
-          <div class="market-card-change positive">▲ +0.84%</div>
-        </div>
-        <div class="market-card" data-tv="TVC:SILVER">
-          <div class="market-card-label">Silver（銀）</div>
-          <div class="market-card-value">33.42</div>
-          <div class="market-card-change positive">▲ +1.12%</div>
-        </div>
-        <div class="market-card" data-tv="COMEX:HG1!">
-          <div class="market-card-label">Copper（銅）</div>
-          <div class="market-card-value">4.18</div>
-          <div class="market-card-change positive">▲ +0.67%</div>
-        </div>
-        <div class="market-card" data-tv="TVC:USOIL">
-          <div class="market-card-label">WTI 原油</div>
-          <div class="market-card-value">67.12</div>
-          <div class="market-card-change negative">▼ -1.23%</div>
-        </div>
-        <div class="market-card" data-tv="NYMEX:NG1!">
-          <div class="market-card-label">天然ガス</div>
-          <div class="market-card-value">4.35</div>
-          <div class="market-card-change negative">▼ -2.18%</div>
-        </div>
-        <div class="market-card" data-tv="BITSTAMP:BTCUSD">
-          <div class="market-card-label">Bitcoin</div>
-          <div class="market-card-value">82,450</div>
-          <div class="market-card-change positive">▲ +2.36%</div>
-        </div>
-        <div class="market-card" data-tv="BITSTAMP:ETHUSD">
-          <div class="market-card-label">Ethereum</div>
-          <div class="market-card-value">1,912</div>
-          <div class="market-card-change positive">▲ +1.84%</div>
-        </div>
-      </div>
-
-      <div class="news-headlines">
-        <div class="news-headlines-header">📰 コモディティ関連ニュース</div>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:38</span>
-          <span class="news-item-title">金価格が$2,980で史上最高値を更新、中銀の買い増し継続</span>
-          <span class="news-item-source">Reuters</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:02</span>
-          <span class="news-item-title">WTI原油が67ドル台に下落、OPEC+増産観測が重し</span>
-          <span class="news-item-source">Bloomberg</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">05:25</span>
-          <span class="news-item-title">銅価格が上昇、中国の景気刺激策への期待で需要見通し改善</span>
-          <span class="news-item-source">FT</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:40</span>
-          <span class="news-item-title">ビットコインが$82,000台を回復、ETF資金流入が再加速</span>
-          <span class="news-item-source">CoinDesk</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">03:55</span>
-          <span class="news-item-title">天然ガスが急落、暖冬予報で在庫取り崩し見通しが後退</span>
-          <span class="news-item-source">MarketWatch</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Tab: 主要銘柄 -->
-    <div class="market-tab-content" id="tab-stocks">
-      <div class="market-cards">
-        <div class="market-card" data-tv="NASDAQ:AAPL">
-          <div class="market-card-label">AAPL</div>
-          <div class="market-card-value">227.5</div>
-          <div class="market-card-change positive">▲ +0.92%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:NVDA">
-          <div class="market-card-label">NVDA</div>
-          <div class="market-card-value">138.4</div>
-          <div class="market-card-change positive">▲ +3.24%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:MSFT">
-          <div class="market-card-label">MSFT</div>
-          <div class="market-card-value">412.8</div>
-          <div class="market-card-change positive">▲ +1.05%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:AMZN">
-          <div class="market-card-label">AMZN</div>
-          <div class="market-card-value">198.6</div>
-          <div class="market-card-change positive">▲ +1.72%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:GOOGL">
-          <div class="market-card-label">GOOGL</div>
-          <div class="market-card-value">168.3</div>
-          <div class="market-card-change negative">▼ -0.38%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:META">
-          <div class="market-card-label">META</div>
-          <div class="market-card-value">612.5</div>
-          <div class="market-card-change positive">▲ +2.15%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:TSLA">
-          <div class="market-card-label">TSLA</div>
-          <div class="market-card-value">248.3</div>
-          <div class="market-card-change positive">▲ +4.52%</div>
-        </div>
-        <div class="market-card" data-tv="NASDAQ:AVGO">
-          <div class="market-card-label">AVGO</div>
-          <div class="market-card-value">178.9</div>
-          <div class="market-card-change positive">▲ +2.87%</div>
-        </div>
-        <div class="market-card" data-tv="NYSE:TSM">
-          <div class="market-card-label">TSM</div>
-          <div class="market-card-value">172.4</div>
-          <div class="market-card-change positive">▲ +1.93%</div>
-        </div>
-        <div class="market-card" data-tv="NYSE:BRK.B">
-          <div class="market-card-label">BRK.B</div>
-          <div class="market-card-value">524.1</div>
-          <div class="market-card-change positive">▲ +0.34%</div>
-        </div>
-        <div class="market-card" data-tv="NYSE:JPM">
-          <div class="market-card-label">JPM</div>
-          <div class="market-card-value">245.7</div>
-          <div class="market-card-change negative">▼ -0.58%</div>
-        </div>
-      </div>
-
-      <div class="news-headlines">
-        <div class="news-headlines-header">📰 主要銘柄ニュース</div>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:50</span>
-          <span class="news-item-title">NVIDIA、次世代GPU「Blackwell Ultra」の量産前倒しを発表</span>
-          <span class="news-item-source">Reuters</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">06:22</span>
-          <span class="news-item-title">Tesla、FSD v13のリコール対応完了で株価4%超上昇</span>
-          <span class="news-item-source">CNBC</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">05:55</span>
-          <span class="news-item-title">Microsoft、Copilot導入企業が10万社突破でAI収益化が加速</span>
-          <span class="news-item-source">Bloomberg</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">05:10</span>
-          <span class="news-item-title">Meta、Threads月間ユーザー3億人突破でX対抗が本格化</span>
-          <span class="news-item-source">The Verge</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-        <a href="#" class="news-item" target="_blank">
-          <span class="news-item-time">04:30</span>
-          <span class="news-item-title">Broadcom、VMware統合効果で営業利益率が過去最高に</span>
-          <span class="news-item-source">FT</span>
-          <span class="news-item-arrow">→</span>
-        </a>
-      </div>
-    </div>
+    <h1 class="hero-title" id="heroGreeting"></h1>
   </div>
-</section>
-
-<!-- ===== 4 Main Panels ===== -->
-<section class="panels-section fade-in">
-  <div class="panels-grid">
-
-    <a href="https://yskzz121.github.io/ui-kabu-times/" class="panel-card morning">
-      <div class="panel-icon morning-bg">📰</div>
-      <h3 class="panel-title">朝刊</h3>
-      <p class="panel-desc">毎朝の米国株マーケットニュースをお届け</p>
-      <div class="panel-badge"><span class="new-dot"></span> 今日の朝刊を読む</div>
-      <div class="panel-lock-badge gated-premium-badge" style="display:none">🔒 アーカイブは有料プラン</div>
-    </a>
-
-    <a href="https://yskzz121.github.io/ui-kabu-reports/" target="_blank" class="panel-card earnings">
-      <div class="panel-icon earnings-bg">📊</div>
-      <h3 class="panel-title">決算分析</h3>
-      <p class="panel-desc">主要銘柄の決算データを独自スコアで評価</p>
-      <div class="panel-badge">四半期 30〜50社をカバー</div>
-      <div class="panel-lock-badge gated-premium-badge" style="display:none">🔒 全銘柄は有料プラン</div>
-    </a>
-
-    <a href="#" class="panel-card learn" id="panelLearn">
-      <div class="panel-icon learn-bg">📖</div>
-      <h3 class="panel-title">投資の教科書</h3>
-      <p class="panel-desc">チャート・決算書・金利など投資の基礎を学ぶ</p>
-      <div class="panel-badge">全31レッスン公開中</div>
-      <div class="panel-lock-badge gated-premium-badge" style="display:none">🔒 有料プラン限定</div>
-    </a>
-
-    <a href="https://yskzz121.github.io/ui-kabu-times/special/okinawa-chika-2026.html" target="_blank" class="panel-card special">
-      <div class="panel-icon special-bg">📑</div>
-      <h3 class="panel-title">特集レポート</h3>
-      <p class="panel-desc">テーマ別の深掘り分析レポート</p>
-      <div class="panel-badge"><span class="new-dot"></span> 沖縄不動産地価分析 2026</div>
-    </a>
-
-  </div>
-</section>
-
-<!-- ===== Earnings Calendar ===== -->
-<section class="earnings-cal fade-in">
-  <div class="earnings-cal-header">
-    <h2 class="earnings-cal-title"><span class="section-title-icon">📅</span> 今週の決算カレンダー</h2>
-    <span class="earnings-cal-week">3/17（月）〜 3/21（金）</span>
-  </div>
-  <div class="earnings-cal-grid">
-    <!-- Monday -->
-    <div class="earnings-cal-day">
-      <div class="earnings-cal-day-header">月 <span class="day-date">3/17</span></div>
-      <div class="earnings-cal-tickers">
-        <span class="earnings-cal-ticker"><img src="https://yskzz121.github.io/ui-kabu-reports/logos/LULU.svg" alt="LULU">LULU<span class="timing-badge">AMC</span></span>
-      </div>
-    </div>
-    <!-- Tuesday -->
-    <div class="earnings-cal-day">
-      <div class="earnings-cal-day-header">火 <span class="day-date">3/18</span></div>
-      <div class="earnings-cal-tickers">
-        <span class="earnings-cal-ticker">GIS<span class="timing-badge">BMO</span></span>
-        <span class="earnings-cal-ticker">WSM<span class="timing-badge">BMO</span></span>
-        <span class="earnings-cal-ticker"><img src="https://yskzz121.github.io/ui-kabu-reports/logos/MU.svg" alt="MU">MU<span class="timing-badge">AMC</span></span>
-        <span class="earnings-cal-ticker">FIVE<span class="timing-badge">AMC</span></span>
-      </div>
-    </div>
-    <!-- Wednesday (today) -->
-    <div class="earnings-cal-day today">
-      <div class="earnings-cal-day-header">水 <span class="day-date">3/19</span></div>
-      <div class="earnings-cal-tickers">
-        <span class="earnings-cal-ticker">BABA<span class="timing-badge">BMO</span></span>
-        <span class="earnings-cal-ticker">ACN<span class="timing-badge">BMO</span></span>
-        <span class="earnings-cal-ticker">FDX<span class="timing-badge">AMC</span></span>
-      </div>
-    </div>
-    <!-- Thursday -->
-    <div class="earnings-cal-day">
-      <div class="earnings-cal-day-header">木 <span class="day-date">3/20</span></div>
-      <div class="earnings-cal-tickers">
-        <span class="earnings-cal-ticker"><img src="https://yskzz121.github.io/ui-kabu-reports/logos/NKE.svg" alt="NKE">NKE<span class="timing-badge">AMC</span></span>
-        <span class="earnings-cal-ticker">XPEV<span class="timing-badge">BMO</span></span>
-      </div>
-    </div>
-    <!-- Friday -->
-    <div class="earnings-cal-day">
-      <div class="earnings-cal-day-header">金 <span class="day-date">3/21</span></div>
-      <div class="earnings-cal-tickers">
-        <span class="earnings-cal-empty">— 主要決算なし</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== Sector Heatmap ===== -->
-<section class="heatmap-section fade-in">
-  <div class="heatmap-header">
-    <h2 class="heatmap-title"><span class="section-title-icon">🗺️</span> セクター・ヒートマップ</h2>
-    <span class="heatmap-date">S&P 500 セクター別</span>
-  </div>
-  <div class="heatmap-grid" id="heatmapGrid"></div>
 </section>
 
 <!-- ===== Main Content ===== -->
 <main class="main">
 
-  <!-- Latest Content -->
+  <!-- A. 最新コンテンツ -->
   <div class="section-header fade-in">
     <h2 class="section-title"><span class="section-title-icon">📌</span> 最新コンテンツ</h2>
-    <a href="#" class="section-more">すべて見る →</a>
   </div>
 
   <div class="content-grid fade-in">
@@ -1932,10 +704,10 @@ a.content-card { text-decoration: none; color: inherit; }
     <div class="content-card" data-category="morning" data-access="free">
       <div class="card-top">
         <span class="card-tag morning">☀️ 朝刊</span>
-        <span class="card-date">2026/03/12</span>
+        <span class="card-date">2026/03/25</span>
       </div>
-      <h3 class="card-title">CPI鈍化で利下げ期待が再燃、テック株が全面高</h3>
-      <p class="card-excerpt">2月の消費者物価指数（CPI）が前年比+2.8%と市場予想を下回り、FRBの6月利下げ観測が強まりました。NASDAQ は+1.38%と反発し、半導体セクターが牽引...</p>
+      <h3 class="card-title">トランプ相互関税の部分緩和で市場に安堵感、S&P500は3日続伸</h3>
+      <p class="card-excerpt">自動車・半導体関連への一部関税適用除外が報じられ、リスクオンムードに。NASDAQは+1.2%と反発し、テック株全般が買い戻された...</p>
     </div>
 
     <div class="content-card" data-category="earnings" data-access="premium" data-ticker="ORCL">
@@ -1966,21 +738,57 @@ a.content-card { text-decoration: none; color: inherit; }
       </div>
     </div>
 
-    <div class="content-card" data-category="morning" data-access="premium-archive">
+    <div class="content-card" data-category="earnings" data-access="premium" data-ticker="MU">
       <div class="card-top">
-        <span class="card-tag morning">☀️ 朝刊</span>
-        <span class="card-date">2026/03/11</span>
+        <span class="card-tag earnings">📊 決算分析</span>
+        <span class="card-date">2026/03/20</span>
       </div>
-      <h3 class="card-title">関税リスク後退でセンチメント改善、金は最高値更新</h3>
-      <p class="card-excerpt">トランプ政権がカナダ・メキシコへの関税発動を延期する可能性が報じられ、リスクオンの展開に。金は$2,980と史上最高値を更新...</p>
+      <h3 class="card-title">MU（Micron）FY26Q2 決算レポート</h3>
+      <p class="card-excerpt">HBM需要がAI学習・推論の両面で急拡大。データセンター向け売上が前年比+80%超と大幅成長し、ガイダンスも市場予想を上回る...</p>
+      <div class="earnings-meta">
+        <span class="earnings-ticker">MU</span>
+        <span class="earnings-quarter">FY26Q2</span>
+        <span class="score-badge score-4">📈 スコア 4</span>
+      </div>
     </div>
 
   </div>
 
-  <!-- 投資の教科書 -->
+  <!-- B. Atlasを探索する -->
   <div class="section-header fade-in" style="margin-top: 40px;">
+    <h2 class="section-title"><span class="section-title-icon">🧭</span> Atlasを探索する</h2>
+  </div>
+
+  <div class="explore-grid fade-in">
+    <a href="https://yskzz121.github.io/ui-kabu-reports/" class="explore-card" target="_blank">
+      <span class="explore-icon">📊</span>
+      <span class="explore-title">決算分析</span>
+      <span class="explore-desc">主要銘柄の決算データを独自スコアで評価。四半期30〜50社をカバー</span>
+      <span class="explore-arrow">ポータルへ →</span>
+    </a>
+    <a href="https://yskzz121.github.io/ui-kabu-times/" class="explore-card" target="_blank">
+      <span class="explore-icon">📰</span>
+      <span class="explore-title">Atlas Daily</span>
+      <span class="explore-desc">毎朝の米国株マーケットニュースをお届け</span>
+      <span class="explore-arrow">朝刊を読む →</span>
+    </a>
+    <a href="https://yskzz121.github.io/ui-kabu-times/glossary/" class="explore-card" target="_blank">
+      <span class="explore-icon">📖</span>
+      <span class="explore-title">用語辞典</span>
+      <span class="explore-desc">投資・経済の重要用語をわかりやすく解説</span>
+      <span class="explore-arrow">辞典を開く →</span>
+    </a>
+    <a href="#learn" class="explore-card">
+      <span class="explore-icon">📚</span>
+      <span class="explore-title">学ぶ</span>
+      <span class="explore-desc">チャート・決算書・金利など投資の基礎を学ぶ教科書</span>
+      <span class="explore-arrow">教科書 →</span>
+    </a>
+  </div>
+
+  <!-- C. 投資の教科書 -->
+  <div class="section-header fade-in" style="margin-top: 40px;" id="learn">
     <h2 class="section-title"><span class="section-title-icon">📖</span> 投資の教科書</h2>
-    <a href="#" class="section-more">すべて見る →</a>
   </div>
 
   <div class="learn-grid fade-in" id="learnGrid">
@@ -2016,96 +824,14 @@ a.content-card { text-decoration: none; color: inherit; }
     </a>
   </div>
 
-  <!-- Upgrade Banner (shown for guest & free) -->
+  <!-- D. Upgrade Banner (shown for guest & free) -->
   <div class="upgrade-banner fade-in" id="upgradeBanner" style="display:none" onclick="location.href='login.html#register'">
     <div class="upgrade-banner-icon">⭐</div>
     <div class="upgrade-banner-text">
       <h3>有料プランで全コンテンツにアクセス</h3>
-      <p>決算分析30〜50本/期、朝刊アーカイブ、投資の教科書、限定動画、クロス分析レポート、オフライン交流会 — 月額¥980</p>
+      <p>決算分析30〜50本/期、朝刊アーカイブ、投資の教科書、限定動画 — 月額¥980</p>
     </div>
     <button class="upgrade-banner-btn">プランを見る</button>
-  </div>
-
-  <!-- Premium: 限定動画 -->
-  <div class="premium-section" id="sectionVideos">
-    <div class="section-header fade-in" style="margin-top: 40px;">
-      <h2 class="section-title"><span class="section-title-icon">🎥</span> 限定動画</h2>
-      <a href="#" class="section-more">すべて見る →</a>
-    </div>
-    <div class="video-grid fade-in">
-      <div class="video-card">
-        <div class="video-thumb">
-          <span class="video-thumb-icon">▶️</span>
-          <span class="video-duration">18:42</span>
-        </div>
-        <div class="video-info">
-          <div class="video-title">ホルムズ海峡危機 — 原油高が米株に与える影響シナリオ</div>
-          <div class="video-meta">2026/03/13 配信</div>
-        </div>
-      </div>
-      <div class="video-card">
-        <div class="video-thumb">
-          <span class="video-thumb-icon">▶️</span>
-          <span class="video-duration">24:15</span>
-        </div>
-        <div class="video-info">
-          <div class="video-title">FOMC 3月会合プレビュー：利下げはいつ始まるのか</div>
-          <div class="video-meta">2026/03/11 配信</div>
-        </div>
-      </div>
-      <div class="video-card">
-        <div class="video-thumb">
-          <span class="video-thumb-icon">▶️</span>
-          <span class="video-duration">15:30</span>
-        </div>
-        <div class="video-info">
-          <div class="video-title">今週の決算ピックアップ — ADBE・DKS・ORCL を読み解く</div>
-          <div class="video-meta">2026/03/10 配信</div>
-        </div>
-      </div>
-      <div class="video-card">
-        <div class="video-thumb">
-          <span class="video-thumb-icon">▶️</span>
-          <span class="video-duration">21:08</span>
-        </div>
-        <div class="video-info">
-          <div class="video-title">AI半導体バブルは続くのか？NVDA・AVGO・TSMの比較分析</div>
-          <div class="video-meta">2026/03/07 配信</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Premium: クロス分析レポート -->
-  <div class="premium-section" id="sectionCrossReport">
-    <div class="section-header fade-in" style="margin-top: 40px;">
-      <h2 class="section-title"><span class="section-title-icon">📋</span> クロス分析レポート</h2>
-    </div>
-    <div class="cross-report-card fade-in">
-      <div class="cross-report-icon">📊</div>
-      <div class="cross-report-info">
-        <div class="cross-report-title">2026年Q1 米国マーケット クロス分析レポート</div>
-        <div class="cross-report-desc">FY26Q4決算シーズンを総括。セクター別トレンド、AI関連銘柄の成長率比較、バリュエーション分析、次四半期のガイダンス傾向をまとめた四半期レポート。</div>
-        <span class="cross-report-badge">2026/03/01 公開</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Guest/Free: プレビューティーザー -->
-  <div id="previewTeaser" style="display:none">
-    <div class="preview-teaser fade-in" style="margin-top: 32px;">
-      <div class="preview-teaser-title">有料プランではさらにこんなコンテンツが楽しめます</div>
-      <div class="preview-teaser-desc">月額¥980で、投資に必要なすべての情報にアクセス</div>
-      <div class="preview-teaser-items">
-        <span class="preview-teaser-item">🎥 限定動画 月5〜8本</span>
-        <span class="preview-teaser-item">📋 四半期クロス分析</span>
-        <span class="preview-teaser-item">📊 全銘柄の決算分析</span>
-        <span class="preview-teaser-item">📰 朝刊アーカイブ</span>
-        <span class="preview-teaser-item">📖 投資の教科書</span>
-        <span class="preview-teaser-item">🤝 オフライン交流会</span>
-      </div>
-      <a href="login.html#register" class="lock-cta upgrade" id="teaserCta">有料プランを見る</a>
-    </div>
   </div>
 
   <!-- Disclaimer -->
@@ -2139,19 +865,8 @@ a.content-card { text-decoration: none; color: inherit; }
 
 <script>
 // ==========================================
-// Dynamic Date
-// ==========================================
-(function() {
-  const now = new Date();
-  const weekdays = ['日','月','火','水','木','金','土'];
-  const y = now.getFullYear();
-  const m = now.getMonth() + 1;
-  const d = now.getDate();
-  const w = weekdays[now.getDay()];
-  document.getElementById('heroDate').textContent = y + '年' + m + '月' + d + '日（' + w + '）';
-})();
-
 // Theme Toggle (localStorage key: ui-kabu-times-theme — 全プロダクト共通)
+// ==========================================
 (function(){
   var toggle = document.getElementById('themeToggle');
   var html = document.documentElement;
@@ -2168,178 +883,11 @@ a.content-card { text-decoration: none; color: inherit; }
   }
 })();
 
-// Market Tabs
-document.querySelectorAll('.market-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.market-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.market-tab-content').forEach(c => c.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.target).classList.add('active');
-  });
-});
-
-// ==========================================
-// Crash Risk Meter — Composite Calculation
-// ==========================================
-(function() {
-  // Input data (from the sentiment cards above)
-  const indicators = {
-    vix:          { value: 18.32, weight: 25 },
-    skew:         { value: 142.6, weight: 15 },
-    move:         { value: 98.4,  weight: 10 },
-    fearGreed:    { value: 62,    weight: 15 },  // inverted: low = risky
-    putCallRatio: { value: 0.82,  weight: 10 },
-    hySpread:     { value: 3.24,  weight: 15 },
-    yieldCurve:   { value: (4.28 - 3.96), weight: 10 }  // 10Y - 2Y spread
-  };
-
-  // Normalize each indicator to 0-100 risk score
-  function normalize(name, val) {
-    switch(name) {
-      case 'vix':
-        // <15 = 10, 15-20 = 20-40, 20-30 = 40-65, 30-40 = 65-85, >40 = 85-100
-        if (val < 12) return 5;
-        if (val < 15) return 10 + (val - 12) / 3 * 15;
-        if (val < 20) return 25 + (val - 15) / 5 * 20;
-        if (val < 30) return 45 + (val - 20) / 10 * 25;
-        if (val < 40) return 70 + (val - 30) / 10 * 15;
-        return Math.min(100, 85 + (val - 40) / 20 * 15);
-      case 'skew':
-        // Normal ~130, elevated >140, extreme >150
-        if (val < 120) return 10;
-        if (val < 130) return 10 + (val - 120) / 10 * 15;
-        if (val < 140) return 25 + (val - 130) / 10 * 20;
-        if (val < 150) return 45 + (val - 140) / 10 * 25;
-        return Math.min(100, 70 + (val - 150) / 20 * 30);
-      case 'move':
-        // <80 = low, 80-100 = moderate, 100-130 = elevated, >130 = high
-        if (val < 60) return 5;
-        if (val < 80) return 5 + (val - 60) / 20 * 15;
-        if (val < 100) return 20 + (val - 80) / 20 * 25;
-        if (val < 130) return 45 + (val - 100) / 30 * 30;
-        return Math.min(100, 75 + (val - 130) / 40 * 25);
-      case 'fearGreed':
-        // Inverted: 0(Extreme Fear)=high risk, 100(Extreme Greed)=low risk...
-        // Actually extreme greed is ALSO risky (complacency)
-        // U-shaped: safest at 40-60
-        const dist = Math.abs(val - 50);
-        if (dist < 10) return 15;
-        if (dist < 20) return 15 + (dist - 10) / 10 * 20;
-        if (dist < 35) return 35 + (dist - 20) / 15 * 30;
-        return Math.min(100, 65 + (dist - 35) / 15 * 35);
-      case 'putCallRatio':
-        // <0.7 complacent=risky, 0.7-1.0 normal, >1.2 panic=risky
-        if (val < 0.5) return 70;
-        if (val < 0.7) return 70 - (val - 0.5) / 0.2 * 40;
-        if (val < 1.0) return 15 + (val - 0.7) / 0.3 * 15;
-        if (val < 1.2) return 30 + (val - 1.0) / 0.2 * 25;
-        return Math.min(100, 55 + (val - 1.2) / 0.5 * 45);
-      case 'hySpread':
-        // <3 = calm, 3-4 = normal, 4-5 = elevated, 5-7 = high, >7 = crisis
-        if (val < 2.5) return 5;
-        if (val < 3.5) return 5 + (val - 2.5) / 1 * 20;
-        if (val < 4.5) return 25 + (val - 3.5) / 1 * 25;
-        if (val < 6) return 50 + (val - 4.5) / 1.5 * 25;
-        return Math.min(100, 75 + (val - 6) / 3 * 25);
-      case 'yieldCurve':
-        // Inverted (<0) = high risk, 0-0.5 = elevated, >0.5 = normal
-        if (val < -0.5) return 90;
-        if (val < 0) return 50 + (-val) / 0.5 * 40;
-        if (val < 0.3) return 30 + (0.3 - val) / 0.3 * 20;
-        if (val < 0.8) return 15;
-        return 10;
-      default: return 50;
-    }
-  }
-
-  // Calculate weighted composite score
-  let totalWeight = 0;
-  let weightedSum = 0;
-  const factors = [];
-
-  for (const [name, ind] of Object.entries(indicators)) {
-    const score = normalize(name, ind.value);
-    weightedSum += score * ind.weight;
-    totalWeight += ind.weight;
-
-    const labels = {
-      vix: 'VIX（恐怖指数）',
-      skew: 'SKEW（テールリスク）',
-      move: 'MOVE（債券Vol）',
-      fearGreed: 'Fear & Greed',
-      putCallRatio: 'Put/Call Ratio',
-      hySpread: 'HYスプレッド',
-      yieldCurve: 'イールドカーブ'
-    };
-
-    factors.push({
-      name: labels[name] || name,
-      score: Math.round(score),
-      color: score < 30 ? '#3fb950' : score < 50 ? '#d29922' : score < 70 ? '#f5a623' : '#f85149'
-    });
-  }
-
-  const compositeScore = Math.round(weightedSum / totalWeight);
-
-  // Determine risk level
-  let riskLevel, riskColor, riskBg, riskClass;
-  if (compositeScore < 20) {
-    riskLevel = '低リスク'; riskColor = '#3fb950'; riskBg = 'rgba(63,185,80,.15)'; riskClass = '';
-  } else if (compositeScore < 35) {
-    riskLevel = 'やや注意'; riskColor = '#58a6ff'; riskBg = 'rgba(56,139,253,.15)'; riskClass = '';
-  } else if (compositeScore < 50) {
-    riskLevel = '警戒'; riskColor = '#d29922'; riskBg = 'rgba(210,153,34,.15)'; riskClass = 'risk-elevated';
-  } else if (compositeScore < 70) {
-    riskLevel = '高リスク'; riskColor = '#f5a623'; riskBg = 'rgba(245,166,35,.15)'; riskClass = 'risk-elevated';
-  } else {
-    riskLevel = '暴落警報'; riskColor = '#f85149'; riskBg = 'rgba(248,81,73,.15)'; riskClass = 'risk-high';
-  }
-
-  // Render
-  const meter = document.getElementById('riskMeter');
-  const scoreEl = document.getElementById('riskScore');
-  const labelEl = document.getElementById('riskLabel');
-  const fillEl = document.getElementById('riskGaugeFill');
-  const needleEl = document.getElementById('riskNeedle');
-  const breakdownEl = document.getElementById('riskBreakdown');
-
-  scoreEl.textContent = compositeScore;
-  scoreEl.style.color = riskColor;
-  labelEl.textContent = riskLevel;
-  labelEl.style.color = riskColor;
-  labelEl.style.background = riskBg;
-
-  if (riskClass) meter.classList.add(riskClass);
-
-  // Build breakdown
-  breakdownEl.innerHTML = factors.map(f => `
-    <div class="risk-factor">
-      <div class="risk-factor-header">
-        <span class="risk-factor-name">${f.name}</span>
-        <span class="risk-factor-value" style="color:${f.color}">${f.score}</span>
-      </div>
-      <div class="risk-factor-bar">
-        <div class="risk-factor-bar-fill" data-width="${f.score}" style="background:${f.color}"></div>
-      </div>
-    </div>
-  `).join('');
-
-  // Animate after a short delay
-  setTimeout(() => {
-    fillEl.style.width = compositeScore + '%';
-    needleEl.style.left = `calc(${compositeScore}% - 2px)`;
-
-    document.querySelectorAll('.risk-factor-bar-fill').forEach(bar => {
-      bar.style.width = bar.dataset.width + '%';
-    });
-  }, 300);
-})();
-
 // ==========================================
 // Auth State Management & Content Gating
 // ==========================================
 // Free tickers (Big 6) — these earnings are always accessible
-const FREE_TICKERS = ['AMZN', 'GOOGL', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
+var FREE_TICKERS = ['AMZN', 'GOOGL', 'GOOG', 'META', 'MSFT', 'NVDA', 'TSLA'];
 
 function toggleUserMenu() {
   var dd = document.getElementById('userDropdown');
@@ -2394,38 +942,6 @@ function setAuthState(state) {
     upgradeBanner.style.display = 'flex';
   }
 
-  // Panel premium badges
-  document.querySelectorAll('.gated-premium-badge').forEach(function(el) {
-    el.style.display = (state === 'premium') ? 'none' : 'inline-flex';
-  });
-
-  // Premium-only sections (videos, cross-report)
-  document.querySelectorAll('.premium-section').forEach(function(sec) {
-    if (state === 'premium') {
-      sec.classList.add('visible');
-    } else {
-      sec.classList.remove('visible');
-    }
-  });
-
-  // Preview teaser (shown for guest & free, hidden for premium)
-  var teaser = document.getElementById('previewTeaser');
-  var teaserCta = document.getElementById('teaserCta');
-  if (state === 'premium') {
-    teaser.style.display = 'none';
-  } else {
-    teaser.style.display = 'block';
-    if (state === 'guest') {
-      teaserCta.textContent = 'ログインして詳細を見る';
-      teaserCta.href = 'login.html';
-      teaserCta.className = 'lock-cta login';
-    } else {
-      teaserCta.textContent = '有料プランにアップグレード';
-      teaserCta.href = 'login.html#register';
-      teaserCta.className = 'lock-cta upgrade';
-    }
-  }
-
   // Content cards gating
   applyContentGating(state);
 
@@ -2449,10 +965,8 @@ function applyContentGating(state) {
     var needsLock = false;
 
     if (access === 'premium-archive') {
-      // Past morning archives — premium only
       needsLock = (state !== 'premium');
     } else if (access === 'premium') {
-      // Earnings: Big 6 are free for everyone, others need premium
       if (ticker && FREE_TICKERS.indexOf(ticker) >= 0) {
         needsLock = false;
       } else {
@@ -2559,84 +1073,14 @@ function updateGreeting(state) {
 }
 
 // Fade-in on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
     if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
 
-// ==========================================
-// Sector Heatmap
-// ==========================================
-(function() {
-  var sectors = [
-    { name: 'テクノロジー', etf: 'XLK', change: 2.14 },
-    { name: 'ヘルスケア', etf: 'XLV', change: 0.42 },
-    { name: '金融', etf: 'XLF', change: -0.31 },
-    { name: '一般消費財', etf: 'XLY', change: 1.56 },
-    { name: '通信', etf: 'XLC', change: 1.83 },
-    { name: '資本財', etf: 'XLI', change: -0.18 },
-    { name: '生活必需品', etf: 'XLP', change: -0.52 },
-    { name: 'エネルギー', etf: 'XLE', change: -1.23 },
-    { name: '素材', etf: 'XLB', change: 0.67 },
-    { name: '不動産', etf: 'XLRE', change: 0.89 },
-    { name: '公益事業', etf: 'XLU', change: -0.15 }
-  ];
-
-  var grid = document.getElementById('heatmapGrid');
-  if (!grid) return;
-
-  sectors.forEach(function(s) {
-    var cell = document.createElement('div');
-    cell.className = 'heatmap-cell';
-
-    // Color intensity based on absolute change
-    var abs = Math.abs(s.change);
-    var intensity = Math.min(abs / 3, 1); // cap at 3% for full saturation
-    var bg;
-    if (s.change > 0) {
-      // Green spectrum
-      var r = Math.round(30 - intensity * 20);
-      var g = Math.round(80 + intensity * 100);
-      var b = Math.round(40 - intensity * 10);
-      bg = 'rgb(' + r + ',' + g + ',' + b + ')';
-    } else if (s.change < 0) {
-      // Red spectrum
-      var r2 = Math.round(120 + intensity * 100);
-      var g2 = Math.round(40 - intensity * 20);
-      var b2 = Math.round(30 - intensity * 10);
-      bg = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
-    } else {
-      bg = '#484f58';
-    }
-    cell.style.background = bg;
-
-    var sign = s.change > 0 ? '+' : '';
-    cell.innerHTML =
-      '<div class="heatmap-cell-name">' + s.name + '</div>' +
-      '<div class="heatmap-cell-change">' + sign + s.change.toFixed(2) + '%</div>' +
-      '<div class="heatmap-cell-etf">' + s.etf + '</div>';
-
-    grid.appendChild(cell);
-  });
-})();
-
-// ==========================================
-// Earnings Calendar — highlight today
-// ==========================================
-(function() {
-  var now = new Date();
-  var dayOfWeek = now.getDay(); // 0=Sun, 1=Mon...
-  var days = document.querySelectorAll('.earnings-cal-day');
-  days.forEach(function(d) { d.classList.remove('today'); });
-  // days[0]=Mon, days[1]=Tue, ...
-  if (dayOfWeek >= 1 && dayOfWeek <= 5 && days[dayOfWeek - 1]) {
-    days[dayOfWeek - 1].classList.add('today');
-  }
-})();
-
-// Initialize with guest state (after observer is ready)
+// Initialize with guest state
 setAuthState('guest');
 </script>
 
@@ -2649,110 +1093,6 @@ setAuthState('guest');
     <button class="auth-demo-btn" onclick="setAuthState('premium')">有料会員</button>
   </div>
 </div>
-
-<!-- TradingView Popup Container -->
-<div class="tv-popup" id="tvPopup"><div class="tv-popup-loading"></div></div>
-
-<script>
-// ==========================================
-// TradingView Hover Popup (iframe approach)
-// ==========================================
-(function() {
-  const popup = document.getElementById('tvPopup');
-  if (!popup) return;
-  const cards = document.querySelectorAll('.market-card[data-tv]');
-  let hideTimer = null;
-  let currentSymbol = null;
-
-  function buildChartUrl(symbol) {
-    const params = new URLSearchParams({
-      symbol: symbol,
-      interval: 'D',
-      theme: 'dark',
-      style: '1',
-      locale: 'ja',
-      timezone: 'Asia/Tokyo',
-      hide_top_toolbar: '1',
-      hide_legend: '0',
-      save_image: '0',
-      hide_volume: '0',
-      backgroundColor: 'rgba(13, 17, 23, 1)',
-      gridColor: 'rgba(48, 54, 61, 0.3)',
-      allow_symbol_change: '0',
-      details: '0',
-      calendar: '0',
-      studies: '[]',
-      range: '3M'
-    });
-    return 'https://s.tradingview.com/widgetembed/?' + params.toString();
-  }
-
-  function showPopup(card) {
-    const symbol = card.getAttribute('data-tv');
-    if (!symbol) return;
-    clearTimeout(hideTimer);
-
-    // Position popup near the card
-    const rect = card.getBoundingClientRect();
-    const popW = window.innerWidth <= 768 ? 320 : 480;
-    const popH = window.innerWidth <= 768 ? 240 : 320;
-    let left = rect.left + rect.width / 2 - popW / 2;
-    let top = rect.bottom + 8;
-
-    // Keep within viewport
-    if (left < 8) left = 8;
-    if (left + popW > window.innerWidth - 8) left = window.innerWidth - popW - 8;
-    if (top + popH > window.innerHeight - 8) {
-      top = rect.top - popH - 8;
-    }
-
-    popup.style.left = left + 'px';
-    popup.style.top = top + 'px';
-    popup.style.width = popW + 'px';
-    popup.style.height = popH + 'px';
-
-    // Only reload iframe if symbol changed
-    if (currentSymbol !== symbol) {
-      currentSymbol = symbol;
-      popup.innerHTML = '<div class="tv-popup-loading"></div>';
-
-      const iframe = document.createElement('iframe');
-      iframe.src = buildChartUrl(symbol);
-      iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
-      iframe.setAttribute('allowtransparency', 'true');
-      iframe.setAttribute('frameborder', '0');
-      iframe.onload = function() {
-        const loader = popup.querySelector('.tv-popup-loading');
-        if (loader) loader.remove();
-      };
-      popup.appendChild(iframe);
-    }
-
-    popup.classList.add('visible');
-  }
-
-  function hidePopup() {
-    hideTimer = setTimeout(() => {
-      popup.classList.remove('visible');
-      // Clean up iframe to free resources
-      setTimeout(() => {
-        if (!popup.classList.contains('visible')) {
-          popup.innerHTML = '<div class="tv-popup-loading"></div>';
-          currentSymbol = null;
-        }
-      }, 500);
-    }, 300);
-  }
-
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => showPopup(card));
-    card.addEventListener('mouseleave', hidePopup);
-  });
-
-  popup.addEventListener('mouseenter', () => clearTimeout(hideTimer));
-  popup.addEventListener('mouseleave', hidePopup);
-})();
-</script>
 
 </div><!-- /appContent -->
 <script>
