@@ -125,8 +125,15 @@ body {
 /* ==========================================
    Top Navigation
    ========================================== */
+.nav-site-link {
+  font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: none;
+  letter-spacing: 0.04em; transition: color 0.15s;
+}
+.nav-site-link:hover { color: var(--gold-lt); }
+@media (max-width: 600px) { .nav-site-link { display: none; } }
+
 .top-nav {
-  position: fixed; top: 36px; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: var(--bg-nav);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(184,145,42,0.12);
@@ -178,7 +185,7 @@ body {
    Hero Section
    ========================================== */
 .hero {
-  margin-top: 96px;
+  margin-top: 60px;
   background: var(--bg-hero);
   border-bottom: 1px solid rgba(184,145,42,0.12);
   padding: 44px 20px 48px;
@@ -643,22 +650,16 @@ a.content-card { text-decoration: none; color: inherit; }
 </div>
 </div>
 <div id="appContent" style="display:none">
-<!-- ===== Atlas Common Nav ===== -->
-<div class="atlas-nav" style="background:rgba(26,37,64,0.97);border-bottom:1px solid rgba(184,145,42,0.12);padding:0 5vw;position:sticky;top:0;z-index:101">
-  <div style="display:flex;justify-content:center;align-items:center;height:36px;max-width:1100px;margin:0 auto;gap:24px">
-    <a href="https://yskzz121.github.io/ui-kabu-club/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">ポータル</a>
-    <a href="https://yskzz121.github.io/ui-kabu-times/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">朝刊</a>
-    <a href="https://yskzz121.github.io/ui-kabu-reports/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">分析</a>
-    <a href="https://yskzz121.github.io/ui-kabu-times/glossary/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">用語辞典</a>
-  </div>
-</div>
-<!-- ===== Top Navigation ===== -->
-<nav class="top-nav" style="top:36px">
+<!-- ===== Top Navigation (統合ナビ) ===== -->
+<nav class="top-nav">
   <div class="top-nav-inner">
     <a href="index.html" class="logo">
       <span class="nav-logo-text">Atlas<span class="nav-logo-dot">.</span></span>
     </a>
     <div class="nav-actions">
+      <a href="https://yskzz121.github.io/ui-kabu-times/" class="nav-site-link">朝刊</a>
+      <a href="https://yskzz121.github.io/ui-kabu-reports/" class="nav-site-link">分析</a>
+      <a href="https://yskzz121.github.io/ui-kabu-times/glossary/" class="nav-site-link">用語辞典</a>
       <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">☀️</button>
       <!-- Logged out -->
       <div class="nav-auth" id="navLoggedOut">
