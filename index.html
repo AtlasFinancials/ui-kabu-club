@@ -126,7 +126,7 @@ body {
    Top Navigation
    ========================================== */
 .top-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 36px; left: 0; right: 0; z-index: 100;
   background: var(--bg-nav);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(184,145,42,0.12);
@@ -188,7 +188,7 @@ body {
    Hero Section
    ========================================== */
 .hero {
-  margin-top: 60px;
+  margin-top: 96px;
   background: var(--bg-hero);
   border-bottom: 1px solid rgba(184,145,42,0.12);
   padding: 44px 20px 64px;
@@ -1050,9 +1050,10 @@ a.content-card { text-decoration: none; color: inherit; }
 .auth-demo-title { font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; }
 .auth-demo-btns { display: flex; gap: 6px; flex-wrap: wrap; }
 .auth-demo-btn {
-  padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border);
-  background: transparent; color: var(--text-primary); font-size: 11px;
+  padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border);
+  background: transparent; color: var(--text-primary); font-size: 12px;
   font-family: var(--font-sans); cursor: pointer; transition: all .15s;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
 }
 .auth-demo-btn:hover { background: var(--bg-card-hover); }
 .auth-demo-btn.active { background: var(--accent); color: #0F1829; border-color: var(--accent); }
@@ -1320,10 +1321,19 @@ a.content-card { text-decoration: none; color: inherit; }
 </div>
 </div>
 <div id="appContent" style="display:none">
+<!-- ===== Atlas Common Nav ===== -->
+<div class="atlas-nav" style="background:rgba(26,37,64,0.97);border-bottom:1px solid rgba(184,145,42,0.12);padding:0 5vw;position:sticky;top:0;z-index:101">
+  <div style="display:flex;justify-content:center;align-items:center;height:36px;max-width:1100px;margin:0 auto;gap:24px">
+    <a href="https://yskzz121.github.io/ui-kabu-club/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">ポータル</a>
+    <a href="https://yskzz121.github.io/ui-kabu-times/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">朝刊</a>
+    <a href="https://yskzz121.github.io/ui-kabu-reports/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">分析</a>
+    <a href="https://yskzz121.github.io/ui-kabu-times/glossary/" style="font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em">用語辞典</a>
+  </div>
+</div>
 <!-- ===== Top Navigation ===== -->
-<nav class="top-nav">
+<nav class="top-nav" style="top:36px">
   <div class="top-nav-inner">
-    <a href="#" class="logo">
+    <a href="index.html" class="logo">
       <span class="nav-logo-text">Atlas<span class="nav-logo-dot">.</span></span><span class="nav-logo-sub">by U&I CO., LTD.</span>
     </a>
     <div class="nav-actions">
